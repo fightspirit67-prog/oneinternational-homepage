@@ -208,14 +208,48 @@ contactForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Simulate form submission (in real scenario, you would send data to a server)
-    console.log('Form Data:', data);
+    // ============================================
+    // EmailJS 설정
+    // ============================================
+    const EMAILJS_SERVICE_ID = 'service_oyjuwjp';
+    const EMAILJS_TEMPLATE_ID = 'template_maegdeo';
+    const EMAILJS_PUBLIC_KEY = 'ovyAAdewYgVitoti_';
     
-    // Show success message
-    showNotification('문의가 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'success');
+    // EmailJS가 로드되지 않았거나 설정이 안 된 경우 시뮬레이션
+    if (typeof emailjs === 'undefined' || 
+        EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' || 
+        EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID' ||
+        EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+        
+        console.log('⚠️ EmailJS가 설정되지 않았습니다. 폼 데이터:', data);
+        console.log('📧 실제 이메일을 받으려면 js/main.js 파일에서 EmailJS 설정을 완료하세요.');
+        console.log('👉 설정 방법: README.md 파일 참조');
+        
+        showNotification('문의가 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'success');
+        contactForm.reset();
+        return;
+    }
     
-    // Reset form
-    contactForm.reset();
+    // EmailJS로 실제 이메일 전송
+    showNotification('전송 중...', 'info');
+    
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name: data.name,
+        company: data.company || '(미입력)',
+        email: data.email,
+        phone: data.phone,
+        subject: data.subject,
+        message: data.message,
+        to_email: 'admin@oneintl2025.com'  // 받는 사람 이메일
+    }, EMAILJS_PUBLIC_KEY)
+    .then(() => {
+        showNotification('문의가 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.', 'success');
+        contactForm.reset();
+    })
+    .catch((error) => {
+        console.error('이메일 전송 오류:', error);
+        showNotification('오류가 발생했습니다. 다시 시도해주세요.', 'error');
+    });
 });
 
 // ===========================
