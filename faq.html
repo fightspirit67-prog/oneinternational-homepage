@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="주식회사 원인터네셔널 자주 묻는 질문 FAQ">
+    <title>FAQ - 주식회사 원인터네셔널</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .faq-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .faq-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        .faq-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+        
+        .faq-section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+        
+        .faq-question i {
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="ONE INTERNATIONAL Logo">
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#home" class="nav-link">홈</a></li>
+                    <li><a href="index.html#about" class="nav-link">회사 소개</a></li>
+                    <li><a href="index.html#services" class="nav-link">사업 분야</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">포트폴리오</a></li>
+                    <li><a href="index.html#contact" class="nav-link">문의하기</a></li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- FAQ Content -->
+    <section class="faq-page">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> 홈으로 돌아가기
+            </a>
+            
+            <div class="faq-header">
+                <h1>자주 묻는 질문 (FAQ)</h1>
+                <p>원인터네셔널에 대해 궁금하신 사항을 확인해보세요</p>
+            </div>
+            
+            <!-- 회사 일반 -->
+            <div class="faq-section">
+                <h2 class="faq-section-title"><i class="fas fa-building"></i> 회사 일반</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 원인터네셔널은 어떤 회사인가요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 주식회사 원인터네셔널은 2025년에 설립된 IP 기반 콘텐츠와 실물 경제를 연결하는 종합 사업 기업입니다. 게임 개발, 캐릭터 IP 사업, 유통 사업을 주력으로 하며, AI를 적극 활용하되 사업의 본질적 판단은 사람이 주도하는 방식으로 운영됩니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 회사의 주요 사업 분야는 무엇인가요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 원인터네셔널은 세 가지 주요 사업을 운영합니다:<br>
+                            1) <strong>게임 사업</strong>: 모바일 게임 개발 및 퍼블리싱<br>
+                            2) <strong>캐릭터 IP 사업</strong>: 독창적인 캐릭터 개발 및 라이선싱<br>
+                            3) <strong>유통 사업</strong>: 디지털 및 실물 상품의 효율적인 유통
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 회사의 본사는 어디에 있나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 본사는 충청북도 청주시 청원구 내수읍 은곡묵방길 52-10 203동 402호에 위치하고 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 게임 사업 -->
+            <div class="faq-section">
+                <h2 class="faq-section-title"><i class="fas fa-gamepad"></i> 게임 사업</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 현재 개발 중인 게임은 무엇인가요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 현재 'Animal World(가제)'라는 모바일 게임을 개발 중이며, 2026년 8월 출시를 목표로 하고 있습니다. 외주 개발팀과 협업하여 글로벌 시장을 목표로 제작되고 있습니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 게임은 어떤 플랫폼에서 출시되나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 첫 번째 타이틀은 모바일 플랫폼(iOS, Android)을 목표로 개발되고 있습니다. 향후 성과에 따라 다양한 플랫폼으로 확장할 계획입니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 게임 개발은 직접 하시나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 원인터네셔널은 전문 외주 개발팀과 협업하여 게임을 제작합니다. 당사는 프로젝트 총괄, 기획, 품질 관리, 마케팅을 담당하며, 각 분야의 전문가들과 협력하여 높은 품질의 게임을 만들고 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 캐릭터 IP -->
+            <div class="faq-section">
+                <h2 class="faq-section-title"><i class="fas fa-palette"></i> 캐릭터 IP 사업</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 캐릭터 IP 사업은 언제 시작하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 캐릭터 IP 사업은 2026년부터 본격적으로 구축할 예정입니다. 게임에서 사용되는 캐릭터를 IP화하여 굿즈, 라이선싱 등으로 확장할 계획입니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 캐릭터 IP 라이선싱에 관심이 있습니다. 어떻게 문의하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 캐릭터 IP 라이선싱 문의는 이메일(admin@oneintl2025.com) 또는 전화(010-8331-1407)로 연락 주시면 상담해드리겠습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 파트너십 -->
+            <div class="faq-section">
+                <h2 class="faq-section-title"><i class="fas fa-handshake"></i> 파트너십 & 협업</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 비즈니스 협력을 제안하고 싶습니다. 어떻게 하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 비즈니스 협력 제안은 웹사이트의 문의하기 페이지를 통해 제출하시거나, admin@oneintl2025.com으로 제안서를 보내주시면 검토 후 연락드리겠습니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 외주 개발자/디자이너로 참여하고 싶습니다.</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 원인터네셔널은 각 분야의 전문가들과 프로젝트 단위로 협업하고 있습니다. 포트폴리오와 함께 admin@oneintl2025.com으로 연락 주시면 검토 후 답변드리겠습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 기타 -->
+            <div class="faq-section">
+                <h2 class="faq-section-title"><i class="fas fa-question-circle"></i> 기타</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 회사 방문이 가능한가요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 회사 방문을 원하시면 사전에 전화(010-8331-1407) 또는 이메일(admin@oneintl2025.com)로 예약을 부탁드립니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 투자 관련 문의는 어떻게 하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 투자 관련 문의는 이메일(admin@oneintl2025.com)로 연락 주시면 별도로 상담 일정을 잡아드립니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Q. 언론 보도 및 취재 문의는 어떻게 하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A. 언론 보도 및 취재 문의는 admin@oneintl2025.com으로 연락 주시면 담당자가 응대해드립니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>주식회사 원인터네셔널</h3>
+                    <p>IP 기반 콘텐츠와 실물 경제를 연결하는 종합 사업</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="privacy.html">개인정보처리방침</a></li>
+                        <li><a href="terms.html">이용약관</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ONE INTERNATIONAL. All rights reserved.</p>
+                <p>충북 청주시 청원구 내수읍 은곡묵방길 52-10 203동 402호 | 대표: 최선웅</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Scroll to Top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

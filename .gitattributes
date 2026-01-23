@@ -1,2 +1,144 @@
+# ===========================
+# ONE INTERNATIONAL Website
+# .gitattributes
+# ===========================
+
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# ===========================
+# Source Code
+# ===========================
+
+# Web files
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.svg text eol=lf
+
+# Templates
+*.hbs text eol=lf
+*.mustache text eol=lf
+*.ejs text eol=lf
+
+# Server configuration
+*.htaccess text eol=lf
+*.conf text eol=lf
+nginx.conf text eol=lf
+
+# ===========================
+# Documentation
+# ===========================
+
+*.md text eol=lf
+*.markdown text eol=lf
+*.txt text eol=lf
+LICENSE text eol=lf
+README text eol=lf
+AUTHORS text eol=lf
+CONTRIBUTORS text eol=lf
+CHANGELOG text eol=lf
+
+# ===========================
+# Configuration Files
+# ===========================
+
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+.editorconfig text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# ===========================
+# Scripts
+# ===========================
+
+*.sh text eol=lf
+*.bash text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# ===========================
+# Graphics & Media
+# ===========================
+
+# Images
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.bmp binary
+*.webp binary
+*.svg text eol=lf
+
+# Fonts
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+
+# Audio
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.flac binary
+*.aac binary
+
+# Video
+*.mp4 binary
+*.mov binary
+*.avi binary
+*.mkv binary
+*.webm binary
+
+# ===========================
+# Archives
+# ===========================
+
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.rar binary
+
+# ===========================
+# Documents
+# ===========================
+
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
+*.ppt binary
+*.pptx binary
+
+# ===========================
+# Git LFS (Large File Storage)
+# ===========================
+# Uncomment if using Git LFS
+
+# *.psd filter=lfs diff=lfs merge=lfs -text
+# *.ai filter=lfs diff=lfs merge=lfs -text
+# *.mp4 filter=lfs diff=lfs merge=lfs -text
+# *.mov filter=lfs diff=lfs merge=lfs -text
+
+# ===========================
+# Export-ignore
+# ===========================
+# Files and directories to exclude from export
+
+.gitattributes export-ignore
+.gitignore export-ignore
+.github/ export-ignore
+tests/ export-ignore
+docs/ export-ignore
+*.md export-ignore
