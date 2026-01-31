@@ -12,22 +12,49 @@ const splashScreen = document.getElementById('splashScreen');
 // ===========================
 // Splash Screen
 // ===========================
-window.addEventListener('load', () => {
-    // 로딩 바 애니메이션 2초 + 대기 1초 = 총 3초
-    setTimeout(() => {
-        // 페이드아웃만 적용 (헤더 이동 애니메이션 제거)
-        splashScreen.style.opacity = '0';
-        
-        // 페이드아웃 완료 후 제거
-        setTimeout(() => {
-            splashScreen.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 800);
-    }, 3000); // 3초 대기 (로딩 2초 + 정지 1초)
-});
 
-// 페이지 로딩 중 스크롤 방지
-document.body.style.overflow = 'hidden';
+// Hide splash screen immediately if navigating from internal pages
+const splashScreenElement = document.getElementById('splashScreen');
+if (splashScreenElement) {
+    const skipSplash = sessionStorage.getItem('skipSplash');
+    const isBackNavigation = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
+    
+    if (skipSplash === 'true' || isBackNavigation || document.referrer.includes(window.location.hostname)) {
+        // Hide immediately - no splash
+        splashScreenElement.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        sessionStorage.removeItem('skipSplash');
+        
+        // Scroll to hash if present
+        if (window.location.hash) {
+            setTimeout(() => {
+                const targetId = window.location.hash;
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+    } else {
+        // Show splash screen only for first visit or external links
+        document.body.style.overflow = 'hidden';
+        
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                splashScreenElement.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreenElement.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 800);
+            }, 3000);
+        });
+    }
+}
 
 
 // ===========================
@@ -80,28 +107,33 @@ document.addEventListener('click', (e) => {
 // ===========================
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Remove active class from all links
-        navLinks.forEach(l => l.classList.remove('active'));
-        
-        // Add active class to clicked link
-        link.classList.add('active');
-        
-        // Get target section
         const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
         
-        // Smooth scroll to section
-        if (targetSection) {
-            const headerHeight = header.offsetHeight;
-            const targetPosition = targetSection.offsetTop - headerHeight;
+        // Check if it's an internal link (starts with #)
+        if (targetId.startsWith('#')) {
+            e.preventDefault();
             
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Get target section
+            const targetSection = document.querySelector(targetId);
+            
+            // Smooth scroll to section
+            if (targetSection) {
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
+        // If it's an external link (like business-vision.html), let it work normally
     });
 });
 
@@ -516,6 +548,21 @@ document.addEventListener('DOMContentLoaded', () => {
         skipLink.style.top = '-40px';
     });
     document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // ===========================
+    // Auto-set skipSplash flag for all internal navigation
+    // ===========================
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href) {
+            const url = new URL(link.href, window.location.origin);
+            // Check if it's an internal link (same domain)
+            if (url.hostname === window.location.hostname) {
+                // Set flag to skip splash on next page load
+                sessionStorage.setItem('skipSplash', 'true');
+            }
+        }
+    });
 });
 
 // ===========================

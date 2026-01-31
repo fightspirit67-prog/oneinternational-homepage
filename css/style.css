@@ -219,6 +219,10 @@ button {
     justify-content: space-between;
 }
 
+.logo {
+    flex-shrink: 0;
+}
+
 .logo img {
     height: 50px;
     width: auto;
@@ -226,8 +230,9 @@ button {
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
+    margin-left: auto;
 }
 
 .nav-link {

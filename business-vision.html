@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ONE INTERNATIONAL 사업 비전 - IP 중심 생태계 구축">
+    <title>사업 비전 | 주식회사 원인터네셔널</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* Remove splash screen overflow lock for this page */
+        body {
+            overflow: auto !important;
+        }
+        
+        /* Vision Page Specific Styles */
+        .vision-hero {
+            background: linear-gradient(135deg, #1e4281 0%, #2c5aa0 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .vision-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .vision-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+        
+        .vision-section {
+            padding: 80px 0;
+        }
+        
+        .vision-section:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .section-title-center {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e4281;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title-center:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #1e4281, #3498db);
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .problem-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .problem-card .icon {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .problem-card .quote {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .problem-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .problem-card li {
+            padding: 5px 0;
+            color: #555;
+        }
+        
+        .problem-card li:before {
+            content: '→';
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .global-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .case-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .case-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .case-card .company-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e4281;
+            margin-bottom: 15px;
+        }
+        
+        .case-card .timeline {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .case-card .ip-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .case-card .expansion-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .case-card .expansion-list li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .case-card .expansion-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+        
+        .flow-diagram {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        
+        .flow-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .flow-box.center {
+            background: linear-gradient(135deg, #1e4281 0%, #2c5aa0 100%);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .flow-box.branch {
+            display: inline-block;
+            width: 30%;
+            margin: 0 1.5%;
+            vertical-align: top;
+        }
+        
+        .flow-arrow {
+            font-size: 2rem;
+            color: #1e4281;
+            margin: 10px 0;
+        }
+        
+        .branch-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .capability-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #1e4281;
+        }
+        
+        .capability-card .icon {
+            font-size: 2.5rem;
+            color: #1e4281;
+            margin-bottom: 20px;
+        }
+        
+        .capability-card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .capability-card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #1e4281;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #2c5aa0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 66, 129, 0.3);
+        }
+        
+        .roadmap {
+            max-width: 900px;
+            margin: 50px auto;
+        }
+        
+        .roadmap-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        .roadmap-year {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e4281;
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1e4281;
+        }
+        
+        .roadmap-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .roadmap-content li {
+            padding: 10px 0;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .roadmap-content li:before {
+            content: '•';
+            color: #1e4281;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Desktop Layout (769px and above) */
+        @media (min-width: 769px) {
+            .roadmap-item {
+                display: grid;
+                grid-template-columns: 100px 1fr;
+                gap: 30px;
+                align-items: start;
+                padding: 30px;
+            }
+            
+            .roadmap-year {
+                font-size: 2.5rem;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 80px;
+            }
+            
+            .roadmap-content {
+                flex: 1;
+            }
+        }
+        
+        .final-cta {
+            background: linear-gradient(135deg, #1e4281 0%, #2c5aa0 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .final-cta .contact-info {
+            font-size: 1.3rem;
+            margin: 20px 0;
+        }
+        
+        .final-cta .contact-button {
+            display: inline-block;
+            background: white;
+            color: #1e4281;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .final-cta .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .vision-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .vision-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title-center {
+                font-size: 2rem;
+            }
+            
+            .flow-box.branch {
+                width: 100%;
+                display: block;
+                margin: 10px 0;
+            }
+            
+            .branch-container {
+                flex-direction: column;
+            }
+            
+            .roadmap-item {
+                padding: 20px !important;
+                display: block !important;
+                position: static !important;
+            }
+            
+            .roadmap-year {
+                position: static !important;
+                display: block !important;
+                width: 100% !important;
+                text-align: left !important;
+                font-size: 1.8rem !important;
+                margin: 0 0 15px 0 !important;
+                padding-bottom: 10px !important;
+                border-bottom: 3px solid #1e4281 !important;
+                transform: none !important;
+                left: auto !important;
+                top: auto !important;
+            }
+            
+            .roadmap-content {
+                display: block !important;
+                width: 100% !important;
+            }
+            
+            .roadmap-content li {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="ONE INTERNATIONAL Logo">
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#home" class="nav-link">홈</a></li>
+                    <li><a href="index.html#about" class="nav-link">회사 소개</a></li>
+                    <li><a href="business-vision.html" class="nav-link active">사업 비전</a></li>
+                    <li><a href="index.html#services" class="nav-link">사업 분야</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">포트폴리오</a></li>
+                    <li><a href="index.html#contact" class="nav-link">문의하기</a></li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="vision-hero">
+        <div class="container">
+            <h1>IP 하나로 모든 것을 연결한다</h1>
+            <p>우리는 콘텐츠를 만들지 않습니다.</p>
+            <p style="font-size: 2rem; font-weight: 700; margin-top: 20px;">생태계를 만듭니다.</p>
+        </div>
+    </section>
+
+    <!-- Section 1: Problem -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title-center">왜 한국에는 닌텐도가 없는가?</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="icon">❌</div>
+                    <h3>함정 1: 단일 채널 집중</h3>
+                    <p class="quote">"게임만 만들자"<br>"웹툰만 만들자"</p>
+                    <ul>
+                        <li>한 채널이 실패하면 끝</li>
+                        <li>수익 다각화 불가능</li>
+                        <li>IP 가치 제한적</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="icon">❌</div>
+                    <h3>함정 2: 사후 확장 전략</h3>
+                    <p class="quote">"성공하면 애니 만들자"<br>"히트하면 굿즈 만들자"</p>
+                    <ul>
+                        <li>IP 구조가 이미 고정됨</li>
+                        <li>확장 비용 기하급수적 증가</li>
+                        <li>일관성 없는 세계관</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="icon">❌</div>
+                    <h3>함정 3: IP 보호 부재</h3>
+                    <p class="quote">"일단 만들고 보자"</p>
+                    <ul>
+                        <li>특허·상표 없이 시작</li>
+                        <li>확장 시 법적 분쟁</li>
+                        <li>모방 제품 범람</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Global Cases -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title-center">글로벌 IP 기업들의 공통점</h2>
+            
+            <div class="global-cases">
+                <div class="case-card">
+                    <div class="company-name">닌텐도</div>
+                    <div class="timeline">40년간 지속</div>
+                    <div class="ip-name">🎮 마리오 IP</div>
+                    <ul class="expansion-list">
+                        <li>게임 (다양한 플랫폼)</li>
+                        <li>애니메이션 (극장판)</li>
+                        <li>완구 (피규어, 레고)</li>
+                        <li>테마파크</li>
+                        <li>의류·잡화</li>
+                    </ul>
+                </div>
+                
+                <div class="case-card">
+                    <div class="company-name">포켓몬</div>
+                    <div class="timeline">1년 내 동시 전개</div>
+                    <div class="ip-name">⚡ 포켓몬 IP</div>
+                    <ul class="expansion-list">
+                        <li>게임 (본편)</li>
+                        <li>애니메이션 방영</li>
+                        <li>트레이딩 카드</li>
+                        <li>완구</li>
+                        <li>극장판</li>
+                    </ul>
+                </div>
+                
+                <div class="case-card">
+                    <div class="company-name">디즈니</div>
+                    <div class="timeline">100년 지속</div>
+                    <div class="ip-name">🐭 미키마우스 IP</div>
+                    <ul class="expansion-list">
+                        <li>애니메이션</li>
+                        <li>테마파크</li>
+                        <li>상품 라이선싱</li>
+                        <li>방송 채널</li>
+                        <li>출판</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                이들은 콘텐츠 회사가 아니라<br>
+                <strong style="font-size: 1.5rem;">IP 생태계 기업</strong>입니다.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Our Approach -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title-center">ONE INTERNATIONAL의 접근</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-box center">
+                    독창적인 IP<br>
+                    <small style="font-size: 0.9rem; opacity: 0.9;">(특허·상표로 보호)</small>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="branch-container">
+                    <div class="flow-box branch">
+                        <strong style="color: #8e44ad;">게임</strong><br>
+                        시장 검증
+                    </div>
+                    <div class="flow-box branch">
+                        <strong style="color: #e74c3c;">애니</strong><br>
+                        IP 확장
+                    </div>
+                    <div class="flow-box branch">
+                        <strong style="color: #27ae60;">실물</strong><br>
+                        수익화
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-box center">
+                    글로벌 유통
+                </div>
+            </div>
+            
+            <div style="margin-top: 60px;">
+                <div class="capability-grid">
+                    <div class="capability-card">
+                        <div class="icon">1️⃣</div>
+                        <h3>IP 창작</h3>
+                        <p>독창적인 캐릭터와 세계관 개발</p>
+                        <a href="index.html#contact" class="cta-button">구체적 방법은? →</a>
+                    </div>
+                    
+                    <div class="capability-card">
+                        <div class="icon">2️⃣</div>
+                        <h3>법적 보호</h3>
+                        <p>특허·상표 등록으로 권리 확보<br><strong>특허 1건 | 상표 1건 보유</strong></p>
+                    </div>
+                    
+                    <div class="capability-card">
+                        <div class="icon">3️⃣</div>
+                        <h3>다채널 전개</h3>
+                        <p>게임, 애니, 실물을 동시 기획</p>
+                        <a href="index.html#contact" class="cta-button">상세 전략은? →</a>
+                    </div>
+                    
+                    <div class="capability-card">
+                        <div class="icon">4️⃣</div>
+                        <h3>수익 다각화</h3>
+                        <p>각 채널에서 독립적 수익 창출</p>
+                        <a href="index.html#contact" class="cta-button">세부 구조는? →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 60px;">
+                처음부터 모든 것을 고려합니다.<br>
+                구체적인 방법은 <strong>파트너십 논의 시 공유</strong>합니다.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Why Possible -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title-center">차별화된 역량</h2>
+            
+            <div class="capability-grid">
+                <div class="capability-card">
+                    <div class="icon">🔒</div>
+                    <h3>특허 기반 IP 보호</h3>
+                    <p>우리의 IP는 법적으로 완벽하게 보호됩니다.</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="icon">🎯</div>
+                    <h3>처음부터 다각화 설계</h3>
+                    <p>IP 기획 단계부터 모든 채널을 고려합니다.</p>
+                    <a href="index.html#contact" class="cta-button">구체적 방법은? →</a>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="icon">🌏</div>
+                    <h3>글로벌 벤치마크</h3>
+                    <p>닌텐도·디즈니와 같은 IP 생태계를 구축합니다.</p>
+                    <p><strong>한국 최초 시도</strong></p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="icon">🚀</div>
+                    <h3>효율적 실행 전략</h3>
+                    <p>혁신적인 방법으로 비용을 최적화합니다.</p>
+                    <a href="index.html#contact" class="cta-button">세부 사항은? →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Roadmap -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title-center">단계별 실행 계획</h2>
+            
+            <div class="roadmap">
+                <div class="roadmap-item">
+                    <h3 class="roadmap-year">2025</h3>
+                    <div class="roadmap-content">
+                        <ul>
+                            <li>IP 개발</li>
+                            <li>특허·상표 등록</li>
+                            <li>게임 프로젝트 착수</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <h3 class="roadmap-year">2026</h3>
+                    <div class="roadmap-content">
+                        <ul>
+                            <li>게임 출시</li>
+                            <li>시장 반응 검증</li>
+                            <li>애니 제작 준비</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <h3 class="roadmap-year">2027~</h3>
+                    <div class="roadmap-content">
+                        <ul>
+                            <li>애니 론칭</li>
+                            <li>굿즈 사업 확대</li>
+                            <li>글로벌 유통 네트워크 구축</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 40px;">
+                구체적인 파트너십과 실행 전략은<br>
+                <strong>비즈니스 미팅에서 공유</strong>합니다.
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>함께 만들어갈 파트너를 찾습니다</h2>
+            <p>더 자세한 이야기가 궁금하신가요?</p>
+            <p>투자, 파트너십, 협업 제안 언제든 연락 주세요.</p>
+            
+            <a href="index.html#contact" class="contact-button">문의하기 →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>주식회사 원인터네셔널</h3>
+                    <p>IP 기반 콘텐츠와 실물 경제를 연결하는 종합 사업</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>사업 분야</h4>
+                    <ul>
+                        <li><a href="index.html#services">게임 사업</a></li>
+                        <li><a href="index.html#services">캐릭터 IP</a></li>
+                        <li><a href="index.html#services">유통 사업</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>회사 정보</h4>
+                    <ul>
+                        <li><a href="index.html#about">회사 소개</a></li>
+                        <li><a href="index.html#portfolio">포트폴리오</a></li>
+                        <li><a href="index.html#contact">문의하기</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>고객 지원</h4>
+                    <ul>
+                        <li><a href="index.html#contact">문의하기</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="privacy.html">개인정보처리방침</a></li>
+                        <li><a href="terms.html">이용약관</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ONE International Inc. All rights reserved.</p>
+                <p>충북 청주시 청원구 내수읍 은곡묵방길 52-10 203동 402호 | 대표: 최선웅 | 사업자등록번호: 547-86-03664</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Handle contact links - go directly to index.html#contact without reload splash
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all links that go to index.html#contact
+            const contactLinks = document.querySelectorAll('a[href="index.html#contact"]');
+            
+            contactLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Set a flag to skip splash screen
+                    sessionStorage.setItem('skipSplash', 'true');
+                    
+                    // Navigate to index.html#contact
+                    window.location.href = 'index.html#contact';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
