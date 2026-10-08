@@ -172,6 +172,9 @@ TERMS = f'''                <div class="highlight-box">
 
                 <h2>부칙</h2>
                 <p><strong>시행일:</strong> 본 약관은 {DATE}부터 시행합니다.</p>
+
+                <h2>오픈소스 라이선스</h2>
+                <p>서비스에는 Google의 Firebase, Google Mobile Ads, Google Play 플러그인이 쓰였으며, 이들은 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License 2.0</a>에 따라 제공됩니다.</p>
 '''
 
 PRIVACY = f'''                <div class="highlight-box">
