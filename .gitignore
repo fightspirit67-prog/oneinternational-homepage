@@ -332,3 +332,6 @@ id_dsa
 !.gitattributes
 !README.md
 !LICENSE
+
+# Visual Studio 작업 파일 (PC 경로가 들어 있음)
+.vs/
