@@ -1,0 +1,380 @@
+<!-- 초안 (2026-10-05): 출시 전 법률 검토 권장. tools/make_kapaw_docs.py로 만듦 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="주식회사 원인터네셔널 이용약관">
+    <title>카파우 오픈소스 라이선스 - 주식회사 원인터네셔널</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <style>
+        /* Remove splash screen overflow lock for this page */
+        body {
+            overflow: auto !important;
+        }
+        
+        .terms-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+        
+        .terms-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .terms-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .terms-header .updated {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .terms-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            line-height: 1.8;
+        }
+        
+        .terms-content h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .terms-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .terms-content p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .terms-content ul, .terms-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .terms-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .terms-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .highlight-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .terms-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="ONE INTERNATIONAL Logo">
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html#home" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#about" class="nav-link">회사 소개</a></li>
+                    <li><a href="../index.html#services" class="nav-link">사업 분야</a></li>
+                    <li><a href="../index.html#portfolio" class="nav-link">포트폴리오</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">문의하기</a></li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Terms Content -->
+    <section class="terms-page">
+        <div class="container">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> 홈으로 돌아가기
+            </a>
+
+            <div class="terms-header">
+                <h1>카파우 오픈소스 라이선스</h1>
+                <p class="updated">카파우(KaPaw) · 시행일: 2026년 10월 5일</p>
+            </div>
+
+            <div class="terms-content">
+                <p>카파우에 쓰인 오픈소스 구성 요소와 라이선스입니다.</p>
+
+                <h2>Apache License 2.0</h2>
+                <p>Firebase Unity SDK·Android·iOS 라이브러리, Google Mobile Ads Unity 플러그인과 User Messaging Platform, Google Play Core·Review, AndroidX, Kotlin 표준 라이브러리, kotlinx.coroutines, gRPC, OkHttp, Okio, Guava, Gson, javax.inject, Abseil, GoogleUtilities, GTMSessionFetcher, PromisesObjC 등은 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License 2.0</a>에 따라 제공됩니다. 각 저작권은 해당 저작자(Google LLC, The Android Open Source Project, JetBrains s.r.o., Square, Inc., The gRPC Authors 등)에게 있습니다.</p>
+
+                <h2>MiniJSON</h2>
+                <p>Firebase Unity SDK에 포함</p>
+                <pre style="white-space:pre-wrap;font-size:13px;line-height:1.5;background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto">Copyright (c) 2013 Calvin Rien
+Based on the JSON parser by Patrick van Bergen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</pre>
+
+                <h2>Checker Framework qualifiers (checker-qual)</h2>
+                <p>Android 라이브러리에 포함</p>
+                <pre style="white-space:pre-wrap;font-size:13px;line-height:1.5;background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto">Copyright 2004-present by the Checker Framework developers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</pre>
+
+                <h2>Protocol Buffers (protobuf-javalite)</h2>
+                <p>Android 라이브러리에 포함</p>
+                <pre style="white-space:pre-wrap;font-size:13px;line-height:1.5;background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto">Copyright 2008 Google Inc. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+    * Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+&quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre>
+
+                <h2>LevelDB</h2>
+                <p>Firebase iOS SDK(Firestore)에 포함</p>
+                <pre style="white-space:pre-wrap;font-size:13px;line-height:1.5;background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto">Copyright (c) 2011 The LevelDB Authors. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+    * Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+&quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre>
+
+                <h2>nanopb</h2>
+                <p>Firebase iOS SDK에 포함</p>
+                <pre style="white-space:pre-wrap;font-size:13px;line-height:1.5;background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto">Copyright (c) 2011 Petteri Aimonen &lt;jpa at nanopb.mail.kapsi.fi&gt;
+
+This software is provided &#x27;as-is&#x27;, without any express or implied
+warranty. In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.</pre>
+
+                <h2>BoringSSL</h2>
+                <p>Firebase iOS SDK(gRPC)에 포함. OpenSSL License, SSLeay License, ISC License에 따라 제공됩니다. 전문: <a href="https://boringssl.googlesource.com/boringssl/+/HEAD/LICENSE" target="_blank" rel="noopener">BoringSSL LICENSE</a></p>
+                <pre style="white-space:pre-wrap;font-size:13px;line-height:1.5;background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto">This product includes software developed by the OpenSSL Project
+for use in the OpenSSL Toolkit. (http://www.openssl.org/)
+This product includes cryptographic software written by Eric Young (eay@cryptsoft.com).
+
+Copyright (c) 1998-2011 The OpenSSL Project. All rights reserved.
+Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com). All rights reserved.
+Copyright (c) 2015, Google Inc.</pre>
+
+                <h2>글꼴</h2>
+                <p>주아체(Copyright 2018 The Jua Project Authors)와 Liberation Sans(Copyright 2012 Red Hat, Inc.)는 <a href="https://openfontlicense.org" target="_blank" rel="noopener">SIL Open Font License 1.1</a>에 따라 쓰였습니다.</p>
+
+                <div class="highlight-box">
+                    <p><strong>문의</strong></p>
+                    <p>
+                        <strong>주식회사 원인터네셔널</strong> (카파우 고객 지원)<br>
+                        이메일: admin@oneintl2025.com<br>
+                        전화: 010-8331-1407<br>
+                        주소: 충북 청주시 청원구 내수읍 은곡묵방길 52-10 203동 402호
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>주식회사 원인터네셔널</h3>
+                    <p>IP 기반 콘텐츠와 실물 경제를 연결하는 종합 사업</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="../index.html">홈</a></li>
+                        <li><a href="../faq.html">FAQ</a></li>
+                        <li><a href="../privacy.html">개인정보처리방침</a></li>
+                        <li><a href="../terms.html">이용약관</a></li>
+                        <li><a href="terms.html">카파우 이용약관</a></li>
+                        <li><a href="privacy.html">카파우 개인정보처리방침</a></li>
+                        <li><a href="delete.html">카파우 계정 삭제</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ONE International Inc. All rights reserved.</p>
+                <p>충북 청주시 청원구 내수읍 은곡묵방길 52-10 203동 402호 | 대표: 최선웅</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Scroll to Top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

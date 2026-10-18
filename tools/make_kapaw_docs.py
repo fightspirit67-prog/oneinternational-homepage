@@ -1,7 +1,10 @@
 # 카파우(KaPaw) 게임 전용 문서 3개를 회사 사이트 디자인(terms.html)으로 만든다: kapaw/terms.html, kapaw/privacy.html, kapaw/delete.html
 #   머리글·바닥글·스타일은 terms.html에서 그대로 가져오고(경로만 ../), 본문만 바꾼다. 내용을 고칠 땐 이 파일을 고치고 다시 실행.
 #   ※ 초안 (2026-10-05). 출시 전 법률 검토 권장. 게임 안 기능(설정의 계정 삭제·맞춤형 광고 끄기)은 출시 전에 넣어야 문서와 맞는다.
-import os, re
+import os, re, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from kapaw_licenses import LICENSES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = open(os.path.join(ROOT, 'terms.html'), encoding='utf-8').read()
@@ -174,7 +177,7 @@ TERMS = f'''                <div class="highlight-box">
                 <p><strong>시행일:</strong> 본 약관은 {DATE}부터 시행합니다.</p>
 
                 <h2>오픈소스 라이선스</h2>
-                <p>서비스에는 Google의 Firebase, Google Mobile Ads, Google Play 플러그인이 쓰였으며, 이들은 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License 2.0</a>에 따라 제공됩니다.</p>
+                <p>서비스에는 Google의 Firebase, Google Mobile Ads, Google Play 플러그인이 쓰였으며, 이들은 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License 2.0</a>에 따라 제공됩니다. 그 밖의 구성 요소와 라이선스 전문은 <a href="licenses.html">오픈소스 라이선스</a>에서 볼 수 있습니다.</p>
 '''
 
 PRIVACY = f'''                <div class="highlight-box">
@@ -328,6 +331,7 @@ for name, title, h1, body in [
     ('terms.html', '카파우 이용약관 - 주식회사 원인터네셔널', '카파우 이용약관', TERMS),
     ('privacy.html', '카파우 개인정보처리방침 - 주식회사 원인터네셔널', '카파우 개인정보처리방침', PRIVACY),
     ('delete.html', '카파우 계정 삭제 안내 - 주식회사 원인터네셔널', '카파우 계정 삭제 안내', DELETE),
+    ('licenses.html', '카파우 오픈소스 라이선스 - 주식회사 원인터네셔널', '카파우 오픈소스 라이선스', LICENSES),
 ]:
     with open(os.path.join(OUT, name), 'w', encoding='utf-8', newline='\n') as f:
         f.write(page(title, h1, body))
