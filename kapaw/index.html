@@ -141,6 +141,32 @@
         .set-shots figcaption { padding: 8px 0 10px; font-family: 'Jua', sans-serif; font-size: 18px; }
         @media (min-width: 860px) { .set-shots { grid-template-columns: 1fr 1fr; } }
 
+        /* ---------- 휴대폰 번호 사전등록 ---------- */
+        .prereg { max-width: 520px; margin: 0 auto 22px; text-align: left; }
+        .prereg-row { display: flex; gap: 8px; }
+        .prereg input[type=tel] {
+            flex: 1; min-width: 0; height: 56px; padding: 0 18px; border: 3px solid #fff; border-radius: 16px;
+            font: 500 18px 'Noto Sans KR', sans-serif; color: var(--brown); background: #fff; box-shadow: inset 0 2px 4px rgba(94, 54, 24, 0.12);
+        }
+        .prereg input[type=tel]:focus { outline: none; border-color: var(--orange); }
+        .prereg .btn { height: 56px; padding: 0 24px; border-radius: 16px; font-size: 20px; flex: none; }
+        .prereg .btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+        .agree { margin: 14px 0 0; padding: 14px 16px; background: rgba(255, 255, 255, 0.7); border-radius: 16px; font-size: 14px; }
+        .agree label { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; }
+        .agree label.all { font-weight: 700; font-size: 15px; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 1px solid #f0d3a2; }
+        .agree input { width: 18px; height: 18px; accent-color: var(--orange-deep); flex: none; margin: 0; }
+        .agree .req { color: var(--orange-deep); font-weight: 700; }
+        .agree .more { margin-left: auto; background: none; border: 0; padding: 2px 4px; font: inherit; font-size: 13px; color: var(--brown-soft); text-decoration: underline; cursor: pointer; flex: none; }
+        .agree .detail { display: none; margin: 2px 0 6px 26px; padding: 10px 12px; background: #fff; border-radius: 10px; font-size: 13px; line-height: 1.7; color: var(--brown-soft); }
+        .agree .detail.open { display: block; }
+        .agree .detail b { color: var(--brown); font-weight: 500; }
+        .prereg-msg { min-height: 22px; margin: 10px 0 0; font-size: 15px; font-weight: 500; text-align: center; }
+        .prereg-msg.err { color: #c0392b; }
+        .prereg-msg.ok { color: var(--green-deep); }
+        .prereg .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .or-store { margin: 4px 0 12px; font-size: 14px; color: var(--brown-soft); }
+        @media (max-width: 859px) { .prereg .btn { padding: 0 16px; font-size: 18px; } }
+
         .stores { display: flex; gap: 10px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
         .store { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; }
         .store img { height: 48px; width: auto; }
@@ -313,6 +339,23 @@
                 </div>
                 <div class="reward-box reveal">
                     <div class="reward-items" data-rewards></div>
+                    <form class="prereg" data-prereg novalidate>
+                        <div class="prereg-row">
+                            <input type="tel" name="phone" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="휴대폰 번호 입력" aria-label="휴대폰 번호">
+                            <button class="btn" type="submit">사전등록</button>
+                        </div>
+                        <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+                        <div class="agree">
+                            <label class="all"><input type="checkbox" data-all>모두 동의합니다</label>
+                            <label><input type="checkbox" name="privacy"><span><span class="req">[필수]</span> 개인정보 수집·이용 동의</span><button class="more" type="button" data-more="d-privacy">보기</button></label>
+                            <div class="detail" id="d-privacy"><b>수집 항목</b> 휴대폰 번호<br><b>목적</b> 카파우 출시 알림과 사전등록 보상 안내 문자 발송<br><b>보유 기간</b> 출시 알림 발송 후 30일 이내 파기<br>동의를 거부할 수 있으며, 거부하면 문자 사전등록을 할 수 없습니다. 스토어 사전등록은 그대로 이용할 수 있습니다. <a href="privacy.html#prereg" target="_blank">개인정보처리방침</a></div>
+                            <label><input type="checkbox" name="sms"><span><span class="req">[필수]</span> 광고성 정보 문자 수신 동의</span><button class="more" type="button" data-more="d-sms">보기</button></label>
+                            <div class="detail" id="d-sms">카파우 출시 소식과 사전등록 보상 안내를 문자로 받습니다. 문자에 적힌 무료 수신거부 번호나 고객 지원 이메일(admin@oneintl2025.com)로 언제든지 철회할 수 있습니다.</div>
+                            <label><input type="checkbox" name="age14"><span><span class="req">[필수]</span> 만 14세 이상입니다</span></label>
+                        </div>
+                        <p class="prereg-msg" data-msg role="status"></p>
+                    </form>
+                    <p class="or-store">스토어에서도 사전등록할 수 있습니다</p>
                     <div class="stores" data-stores></div>
                     <p class="reward-note">※ 지급 기간과 세부 내용은 출시 공지에서 안내합니다.</p>
                 </div>
@@ -448,7 +491,11 @@
         // ===== 여기만 바꾸면 됨 =====
         var CONFIG = {
             playUrl: 'https://play.google.com/store/apps/details?id=com.one.kapaw',
-            appStoreUrl: '',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
+            appStoreUrl: '',
+            // 휴대폰 번호 사전등록 서버 함수 (Firebase/functions/preregister.js). 이 PC에서 띄운 시험 페이지는 개발 서버로
+            preregisterUrl: /^(127\.0\.0\.1|localhost)$/.test(location.hostname)
+                ? 'https://asia-northeast3-kapaw-dev.cloudfunctions.net/preregisterPhone'
+                : 'https://asia-northeast3-kapaw-prod.cloudfunctions.net/preregisterPhone',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
             period: '사전등록 진행 중',
             // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
             rewards: [
@@ -504,6 +551,49 @@
                 : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '출시 예정'));
         });
         document.querySelector('[data-period]').textContent = CONFIG.period;
+
+        // 휴대폰 번호 사전등록
+        (function () {
+            var form = document.querySelector('[data-prereg]'), msg = form.querySelector('[data-msg]');
+            var phone = form.elements.phone, button = form.querySelector('button[type=submit]');
+            var boxes = ['privacy', 'sms', 'age14'].map(function (n) { return form.elements[n]; });
+            var all = form.querySelector('[data-all]');
+            all.addEventListener('change', function () { boxes.forEach(function (b) { b.checked = all.checked; }); });
+            boxes.forEach(function (b) { b.addEventListener('change', function () { all.checked = boxes.every(function (x) { return x.checked; }); }); });
+            form.querySelectorAll('[data-more]').forEach(function (b) {
+                b.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var d = document.getElementById(b.dataset.more), open = d.classList.toggle('open');
+                    b.textContent = open ? '닫기' : '보기';
+                });
+            });
+            // 입력하면서 010-1234-5678 모양으로
+            phone.addEventListener('input', function () {
+                var d = phone.value.replace(/\D/g, '').slice(0, 11);
+                phone.value = d.length < 4 ? d : d.length < 8 ? d.slice(0, 3) + '-' + d.slice(3) : d.slice(0, 3) + '-' + d.slice(3, d.length - 4) + '-' + d.slice(-4);
+            });
+            function say(text, kind) { msg.textContent = text; msg.className = 'prereg-msg ' + (kind || ''); }
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var digits = phone.value.replace(/\D/g, '');
+                if (!/^010\d{8}$|^01[16789]\d{7,8}$/.test(digits)) { say('휴대폰 번호를 확인해 주세요.', 'err'); phone.focus(); return; }
+                if (!boxes.every(function (b) { return b.checked; })) { say('필수 항목에 모두 동의해 주세요.', 'err'); return; }
+                button.disabled = true;
+                say('등록 중입니다…');
+                fetch(CONFIG.preregisterUrl, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: digits, privacy: true, sms: true, age14: true, website: form.elements.website.value, source: location.search.slice(1) })
+                }).then(function (r) {
+                    return r.json().then(function (j) { return { ok: r.ok, body: j }; });
+                }).then(function (r) {
+                    if (!r.ok) throw new Error(r.body.error || '');
+                    say(r.body.status === 'already' ? '이미 사전등록된 번호입니다.' : '사전등록이 완료되었습니다. 출시되면 문자로 알려 드립니다.', 'ok');
+                    if (r.body.status === 'ok') { phone.value = ''; if (window.gtag) gtag('event', 'preregister_phone'); }
+                }).catch(function (err) {
+                    say(err.message || '연결이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.', 'err');
+                }).then(function () { button.disabled = false; });
+            });
+        })();
 
         var rewards = document.querySelector('[data-rewards]');
         CONFIG.rewards.forEach(function (r) {
