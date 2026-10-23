@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <title>카파우: 동물 퍼즐 대전 | 사전등록</title>
-    <meta name="description" content="귀여운 동물 친구들과 3매치 퍼즐로 1:1 실시간 대결! 지금 사전등록하고 보상을 받으세요.">
+    <meta name="description" content="동물 친구들과 펼치는 실시간 1:1 퍼즐 대전, 카파우. 사전등록 진행 중.">
     <link rel="icon" href="img/icon.png">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="카파우">
     <meta property="og:title" content="카파우: 동물 퍼즐 대전">
-    <meta property="og:description" content="귀여운 동물 친구들과 3매치 퍼즐로 1:1 실시간 대결! 지금 사전등록하세요.">
+    <meta property="og:description" content="동물 친구들과 펼치는 실시간 1:1 퍼즐 대전. 사전등록 진행 중.">
     <meta property="og:url" content="https://oneintl2025.com/kapaw/">
     <meta property="og:image" content="https://oneintl2025.com/kapaw/img/og.jpg">
     <meta property="og:image:width" content="1200">
@@ -90,7 +90,7 @@
         /* ---------- 첫 화면 ---------- */
         .hero { position: relative; padding-top: var(--header-h); background: var(--cream); }
         .hero .hero-img { display: block; width: 100%; height: auto; }
-        @media (min-width: 860px) { .hero .hero-img { max-height: 74vh; object-fit: cover; object-position: center 35%; } }
+        @media (min-width: 860px) { .hero .hero-img { max-height: 74vh; object-fit: cover; object-position: center top; } }
         .hero picture { display: block; position: relative; }
         .hero picture::after { content: ''; position: absolute; inset: auto 0 0 0; height: 18%; background: linear-gradient(180deg, rgba(255, 247, 232, 0), var(--cream)); }
         .hero-inner { position: relative; z-index: 1; text-align: center; padding: 6px 16px 70px; margin-top: -30px; }
@@ -273,13 +273,13 @@
         <div class="wrap">
             <a class="logo" href="#top" aria-label="카파우 처음으로"><img src="img/logo.webp" width="900" height="243" alt="KaPaw"></a>
             <nav class="nav" data-nav>
-                <a href="#reward">사전등록 보상</a>
+                <a href="#reward">사전등록</a>
                 <a href="#about">게임 소개</a>
                 <a href="#characters">캐릭터</a>
-                <a href="#modes">즐길 거리</a>
-                <a href="#decor">꾸미기</a>
+                <a href="#modes">게임 모드</a>
+                <a href="#decor">스킨</a>
             </nav>
-            <a class="btn cta" href="#reward">사전등록</a>
+            <a class="btn cta" href="#reward">사전등록하기</a>
             <button class="menu-btn" type="button" aria-label="메뉴 열기" data-menu><span></span><span></span><span></span></button>
         </div>
     </header>
@@ -289,14 +289,14 @@
         <div class="hero" id="top">
             <picture>
                 <source media="(max-width: 859px)" srcset="img/hero_m.webp" width="900" height="604">
-                <img class="hero-img" src="img/hero.webp" width="1920" height="799" alt="카파우: 꽃밭에 모인 동물 친구 다섯 마리">
+                <img class="hero-img" src="img/hero.webp" width="2868" height="1194" alt="카파우: 꽃밭에 모인 동물 친구 다섯 마리">
             </picture>
             <div class="hero-inner">
-                <h1>귀여운 동물 친구들과<br>1:1 실시간 퍼즐 대결!</h1>
-                <p class="lead">같은 동물 셋을 맞추면 상대에게 공격이 날아가요</p>
+                <h1>귀여움은 기본,<br>승부는 진지하게</h1>
+                <p class="lead">동물 친구들과 펼치는 실시간 1:1 퍼즐 대전</p>
                 <div class="row">
                     <a class="btn big" href="#reward">사전등록하기</a>
-                    <button class="play-btn" type="button" data-video><i></i>영상 보기</button>
+                    <button class="play-btn" type="button" data-video><i></i>트레일러</button>
                 </div>
                 <p class="period" data-period></p>
             </div>
@@ -307,18 +307,18 @@
         <section id="reward">
             <div class="wrap">
                 <div class="sec-head reveal">
-                    <span class="tag">사전등록 이벤트</span>
-                    <h2>사전등록하고 선물 받기!</h2>
-                    <p>스토어에서 사전등록하고, 출시 후 게임에 들어오면 우편함으로 받아요</p>
+                    <span class="tag">EVENT</span>
+                    <h2>사전등록 보상</h2>
+                    <p>출시 후 접속하면 우편함으로 지급됩니다.</p>
                 </div>
                 <div class="reward-box reveal">
                     <div class="reward-items" data-rewards></div>
                     <div class="stores" data-stores></div>
-                    <p class="reward-note">※ 보상은 출시 후 사전등록한 계정으로 게임에 들어오면 우편함으로 지급돼요. 자세한 내용은 출시 공지를 확인해 주세요.</p>
+                    <p class="reward-note">※ 지급 기간과 세부 내용은 출시 공지에서 안내합니다.</p>
                 </div>
                 <div class="set-show reveal">
-                    <h3>사전등록 한정 <span>오크나무 축제</span> 세트</h3>
-                    <p>해 진 저녁, 오크나무 집 마을의 축제. 하늘에서 폭죽이 터지고 풍선이 떠올라요. 타일이 터질 때 색종이가 팡! 이기면 폭죽 쇼까지.</p>
+                    <h3>사전등록 한정 스킨 <span>「오크나무 축제」</span></h3>
+                    <p>밤하늘을 수놓는 폭죽과 떠오르는 풍선. 로비, 대전 화면, 음악, 효과까지 모두 바뀝니다.</p>
                     <div class="set-shots">
                         <figure><img src="img/party_lobby.webp" width="1200" height="670" loading="lazy" alt="오크나무 축제 로비"><figcaption>로비</figcaption></figure>
                         <figure><img src="img/party_battle.webp" width="600" height="398" loading="lazy" alt="오크나무 축제 대전 화면"><figcaption>대전</figcaption></figure>
@@ -331,19 +331,19 @@
         <section id="about">
             <div class="wrap">
                 <div class="sec-head reveal">
-                    <span class="tag">게임 소개</span>
-                    <h2>한 판 1분 남짓, 짧고 시원한 승부</h2>
-                    <p>나와 상대가 각자의 판에서 동시에 퍼즐을 풀어요</p>
+                    <span class="tag">ABOUT</span>
+                    <h2>셋을 맞추면, 공격이 시작된다</h2>
+                    <p>상대와 동시에 퍼즐을 풀고, 먼저 쓰러뜨리면 승리.</p>
                 </div>
                 <div class="about">
                     <div class="shot reveal" data-video>
                         <img src="img/08_battle_combo.webp" width="1280" height="589" loading="lazy" alt="퍼즐 대전 화면, 콤보 x27">
-                        <button class="play-btn" type="button"><i></i>30초 영상</button>
+                        <button class="play-btn" type="button"><i></i>트레일러</button>
                     </div>
                     <div class="points">
-                        <div class="point reveal"><span class="num">1</span><div><h3>맞출수록 강한 공격</h3><p>같은 동물 셋을 맞추면 상대 체력이 줄고, 연쇄가 길수록 공격이 세져요.</p></div></div>
-                        <div class="point reveal"><span class="num">2</span><div><h3>스킬로 판을 흔들어라</h3><p>얼음, 돌, 출혈, 회복… 친구마다 다른 스킬로 상대를 방해하거나 나를 지켜요.</p></div></div>
-                        <div class="point reveal"><span class="num">3</span><div><h3>특수 타일로 한 번에 역전</h3><p>4개는 로켓, L·T자는 폭탄, 5개는 길을 직접 그려 터뜨리는 완드!</p></div></div>
+                        <div class="point reveal"><span class="num">1</span><div><h3>연쇄 공격</h3><p>연쇄가 길어질수록 공격이 강해집니다.</p></div></div>
+                        <div class="point reveal"><span class="num">2</span><div><h3>캐릭터 스킬</h3><p>얼음, 돌, 출혈, 회복. 캐릭터마다 스킬이 다릅니다.</p></div></div>
+                        <div class="point reveal"><span class="num">3</span><div><h3>특수 블록</h3><p>로켓, 폭탄, 그리고 길을 그려 터뜨리는 완드.</p></div></div>
                     </div>
                 </div>
             </div>
@@ -353,9 +353,9 @@
         <section id="characters" class="chars">
             <div class="wrap">
                 <div class="sec-head reveal">
-                    <span class="tag">캐릭터</span>
-                    <h2>다섯 동물 친구</h2>
-                    <p>누구와 함께할지 골라 보세요. 레벨을 올리면 더 강해져요</p>
+                    <span class="tag">CHARACTER</span>
+                    <h2>캐릭터</h2>
+                    <p>다섯 캐릭터, 다섯 가지 전략</p>
                 </div>
                 <div class="char-tabs" data-char-tabs></div>
                 <div class="char-panel reveal">
@@ -374,9 +374,9 @@
         <section id="modes">
             <div class="wrap">
                 <div class="sec-head reveal">
-                    <span class="tag">즐길 거리</span>
-                    <h2>대전부터 모험까지</h2>
-                    <p>혼자서도, 친구와도 즐길 거리가 가득해요</p>
+                    <span class="tag">GAME MODE</span>
+                    <h2>게임 모드</h2>
+                    <p>실시간 대전 · 모험 · 퍼즐 · 도전 탑</p>
                 </div>
                 <div class="mode-tabs" data-mode-tabs></div>
                 <div class="mode-view reveal">
@@ -390,16 +390,16 @@
         <section id="decor">
             <div class="wrap">
                 <div class="sec-head reveal">
-                    <span class="tag">꾸미기</span>
-                    <h2>내 마음대로 꾸며요</h2>
-                    <p>로비 배경, 음악, 터치 효과까지 테마로 바꾸고, 대전 판은 전투 스킨으로</p>
+                    <span class="tag">SKIN</span>
+                    <h2>스킨</h2>
+                    <p>테마 스킨은 로비·음악·효과를, 전투 스킨은 대전 화면을 바꿉니다.</p>
                 </div>
-                <h3 class="decor-sub reveal">테마</h3>
+                <h3 class="decor-sub reveal">테마 스킨</h3>
                 <div class="decor-grid">
                     <div class="decor reveal"><img src="img/theme_meadow.webp" loading="lazy" alt="들판 테마"><div class="cap"><b>들판</b><span>기본 테마</span></div></div>
-                    <div class="decor reveal"><img src="img/theme_winter.webp" loading="lazy" alt="눈 내리는 마을 테마"><div class="cap"><b>눈 내리는 마을</b><span>소복소복 눈 내리는 로비</span></div></div>
-                    <div class="decor reveal"><img src="img/theme_halloween.webp" loading="lazy" alt="호박 축제 테마"><div class="cap"><b>호박 축제</b><span>으스스 귀여운 핼러윈</span></div></div>
-                    <div class="decor reveal"><img src="img/theme_xmas.webp" loading="lazy" alt="크리스마스 마을 테마"><div class="cap"><b>크리스마스 마을</b><span>전투까지 크리스마스</span></div></div>
+                    <div class="decor reveal"><img src="img/theme_winter.webp" loading="lazy" alt="눈 내리는 마을 테마"><div class="cap"><b>눈 내리는 마을</b><span>눈 내리는 겨울 마을</span></div></div>
+                    <div class="decor reveal"><img src="img/theme_halloween.webp" loading="lazy" alt="호박 축제 테마"><div class="cap"><b>호박 축제</b><span>핼러윈 호박 마을</span></div></div>
+                    <div class="decor reveal"><img src="img/theme_xmas.webp" loading="lazy" alt="크리스마스 마을 테마"><div class="cap"><b>크리스마스 마을</b><span>시즌 패스 한정</span></div></div>
                 </div>
                 <h3 class="decor-sub reveal">전투 스킨</h3>
                 <div class="decor-grid two">
@@ -415,8 +415,8 @@
                 <div class="final-box reveal">
                     <img class="peek l" src="img/char_fox.webp" alt="" loading="lazy">
                     <img class="peek r" src="img/char_penguin.webp" alt="" loading="lazy">
-                    <h2>지금 바로 사전등록!</h2>
-                    <p>무료로 즐기고, 친구와 실력을 겨뤄 보세요</p>
+                    <h2>지금 사전등록하세요</h2>
+                    <p>출시 소식과 사전등록 보상을 가장 먼저 받아보세요.</p>
                     <div class="stores" data-stores></div>
                 </div>
             </div>
@@ -449,11 +449,11 @@
         var CONFIG = {
             playUrl: 'https://play.google.com/store/apps/details?id=com.one.kapaw',
             appStoreUrl: '',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
-            period: '사전등록 진행 중 · 출시 일정은 곧 알려 드려요',
+            period: '사전등록 진행 중',
             // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
             rewards: [
-                { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '캐릭터 한 명 바로 데려오기' },
-                { img: 'img/reward_party.webp', name: '오크나무 축제 세트', sub: '사전등록 한정 · 로비·전투·음악·효과' }
+                { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '사전등록 보상' },
+                { img: 'img/reward_party.webp', name: '오크나무 축제 세트', sub: '사전등록 한정 스킨' }
             ]
         };
 
@@ -464,17 +464,17 @@
               skills: [['당근', '6초 동안 내 HP 13% 회복'], ['깨끗이', '내 판의 돌·얼음 치우기 + HP 5% 회복'], ['클로버 보호막', '자동 보호막, 깨지면 다음 것이 켜짐'], ['달토끼의 축복', 'HP 15% 회복 + 보호막 19%']] },
             { id: 'penguin', name: '민트', kind: '펭귄', role: '방해', color: '#3d8fd8', bg: '#dceeff',
               skills: [['얼음', '얼음 2칸 + 상대 체력 2% 데미지'], ['고드름', '세 번 두드려야 깨지는 얼음 2칸'], ['한파', '6초 동안 눈! 상대 타일이 50% 느려짐'], ['블리자드', '얼음 6칸 + 6초 동안 100% 느려짐']] },
-            { id: 'panda', name: '록키', kind: '판다', role: '돌 던지기', color: '#5b6b7a', bg: '#e6ece6',
+            { id: 'panda', name: '록키', kind: '판다', role: '방어', color: '#5b6b7a', bg: '#e6ece6',
               skills: [['바위', '돌 1개, 쿵! 돌마다 상대 체력 4%'], ['바위 벽', '가운데에 돌벽 2개'], ['단단하게', '금 간 돌을 다시 단단하게 + 돌 1개'], ['낙석', '돌 5개, 쿵쿵! 돌마다 상대 체력 4%']] },
-            { id: 'fox', name: '나인', kind: '여우', role: '특수 타일', color: '#d8572a', bg: '#ffe0cc',
+            { id: 'fox', name: '나인', kind: '여우', role: '특수 블록', color: '#d8572a', bg: '#ffe0cc',
               skills: [['여우불', '잠든 특수 타일 2개 (매치에 섞이면 터짐)'], ['둔갑', '잠든 특수 타일을 모두 깨움'], ['홀리기', '10초 동안 콤보가 안 끊기고 2배로 쌓임'], ['구미호', '특수 타일 7개']] }
         ];
 
         var MODES = [
-            { name: '실시간 대전', img: 'img/08_battle_combo.webp', title: '실시간 1:1 대전', desc: '랜덤 상대와 겨뤄 트로피를 모으고, 친구에게 대전을 신청해 실력을 겨뤄요.' },
-            { name: '모험', img: 'img/04_map.webp', title: '모험 100 스테이지', desc: '바닷가, 사막, 버섯숲, 유령성, 얼음 동굴, 화산, 하늘섬까지 10개 지역. 지역마다 새로운 장치와 보스가 기다려요. 쉬움·보통·어려움 세 난이도.' },
-            { name: '퍼즐', img: 'img/06_puzzle.webp', title: '퍼즐과 오늘의 퍼즐', desc: '정해진 턴 안에 목표를 이루는 퍼즐, 매일 새로 바뀌는 오늘의 퍼즐로 머리를 써 보세요.' },
-            { name: '도전 탑', img: 'img/05_tower.webp', title: '도전 탑', desc: '한 층씩 올라가며 실력을 시험하고, 이번 주 순위에 이름을 올려요.' }
+            { name: '실시간 대전', img: 'img/08_battle_combo.webp', title: '실시간 1:1 대전', desc: '실시간으로 상대와 겨뤄 트로피를 모읍니다. 친구와의 대전도 가능합니다.' },
+            { name: '모험', img: 'img/04_map.webp', title: '모험 100 스테이지', desc: '바닷가부터 하늘섬까지 10개 지역, 100개 스테이지. 지역마다 새로운 장치와 보스가 등장합니다.' },
+            { name: '퍼즐', img: 'img/06_puzzle.webp', title: '퍼즐', desc: '정해진 턴 안에 목표를 달성하는 180개의 퍼즐. 오늘의 퍼즐은 매일 바뀝니다.' },
+            { name: '도전 탑', img: 'img/05_tower.webp', title: '도전 탑', desc: '한 층씩 올라가 주간 순위에 도전합니다.' }
         ];
 
         // 광고 링크의 utm_* 를 Play 설치 기록(referrer)으로 넘김 → Play 콘솔 '획득 보고서'에서 광고별로 봄
