@@ -1,0 +1,589 @@
+<!-- 카파우 브랜드·사전등록 페이지 (2026-10-23): 쇼츠·SNS 광고를 누르면 들어오는 곳. 넥슨 사전등록 페이지 구성(상단 메뉴·꽉 찬 첫 화면·보상·캐릭터·모드·회사 정보)을 카파우 그림체로.
+     스토어 단추는 utm_* 를 Play 설치 기록(referrer)으로 넘겨 Play 콘솔에서 광고별로 봄. 아래 CONFIG만 바꾸면 보상·스토어 주소가 바뀜 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>카파우: 동물 퍼즐 대전 | 사전등록</title>
+    <meta name="description" content="귀여운 동물 친구들과 3매치 퍼즐로 1:1 실시간 대결! 지금 사전등록하고 보상을 받으세요.">
+    <link rel="icon" href="img/icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="카파우">
+    <meta property="og:title" content="카파우: 동물 퍼즐 대전">
+    <meta property="og:description" content="귀여운 동물 친구들과 3매치 퍼즐로 1:1 실시간 대결! 지금 사전등록하세요.">
+    <meta property="og:url" content="https://oneintl2025.com/kapaw/">
+    <meta property="og:image" content="https://oneintl2025.com/kapaw/img/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #fff7e8;
+            --cream-2: #ffeccc;
+            --brown: #5e3618;
+            --brown-soft: #8a6446;
+            --orange: #f39a2b;
+            --orange-deep: #d8752a;
+            --orange-light: #ffd27a;
+            --green-deep: #3f9a2c;
+            --card: #ffffff;
+            --shadow: 0 12px 32px rgba(94, 54, 24, 0.16);
+            --radius: 24px;
+            --header-h: 64px;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--brown);
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { display: block; max-width: 100%; height: auto; }
+        a { color: inherit; }
+        h1, h2, h3, .jua { font-family: 'Jua', 'Noto Sans KR', sans-serif; font-weight: 400; }
+        .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+        /* ---------- 상단 메뉴 ---------- */
+        .header {
+            position: fixed; inset: 0 0 auto 0; height: var(--header-h); z-index: 50;
+            display: flex; align-items: center;
+            background: rgba(255, 247, 232, 0.92);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 14px rgba(94, 54, 24, 0.1);
+        }
+        .header .wrap { display: flex; align-items: center; gap: 20px; }
+        .header .logo img { height: 34px; width: auto; }
+        .nav { display: flex; gap: 4px; margin-left: 12px; }
+        .nav a {
+            text-decoration: none; font-family: 'Jua', sans-serif; font-size: 18px;
+            padding: 8px 14px; border-radius: 999px; color: var(--brown);
+        }
+        .nav a:hover, .nav a.on { background: var(--cream-2); color: var(--orange-deep); }
+        .header .cta { margin-left: auto; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            border: 0; cursor: pointer; text-decoration: none;
+            font-family: 'Jua', sans-serif; font-size: 18px; line-height: 1;
+            padding: 12px 22px; border-radius: 999px; color: #fff;
+            background: linear-gradient(180deg, #ffb347, var(--orange-deep));
+            box-shadow: 0 4px 0 #a9541a, 0 8px 18px rgba(216, 117, 42, 0.35);
+            transition: transform 0.12s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #a9541a; }
+        .btn.big { font-size: 26px; padding: 18px 40px; }
+        .menu-btn { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; }
+        .menu-btn span { display: block; width: 24px; height: 3px; margin: 5px 0; border-radius: 2px; background: var(--brown); }
+
+        /* ---------- 첫 화면 ---------- */
+        .hero { position: relative; padding-top: var(--header-h); background: var(--cream); }
+        .hero .hero-img { display: block; width: 100%; height: auto; }
+        @media (min-width: 860px) { .hero .hero-img { max-height: 74vh; object-fit: cover; object-position: center 35%; } }
+        .hero picture { display: block; position: relative; }
+        .hero picture::after { content: ''; position: absolute; inset: auto 0 0 0; height: 18%; background: linear-gradient(180deg, rgba(255, 247, 232, 0), var(--cream)); }
+        .hero-inner { position: relative; z-index: 1; text-align: center; padding: 6px 16px 70px; margin-top: -30px; }
+        .hero h1 { margin: 0; font-size: clamp(30px, 5vw, 54px); line-height: 1.2; text-shadow: 0 2px 0 #fff; }
+        .hero .lead { margin: 10px 0 22px; font-size: clamp(15px, 2.4vw, 20px); color: var(--brown-soft); font-weight: 500; }
+        .hero .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
+        .play-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(255, 255, 255, 0.94); border: 0; cursor: pointer;
+            font-family: 'Jua', sans-serif; font-size: 18px; color: var(--brown);
+            padding: 10px 20px 10px 12px; border-radius: 999px; box-shadow: var(--shadow);
+        }
+        .play-btn i { width: 34px; height: 34px; border-radius: 50%; background: var(--orange); display: grid; place-items: center; }
+        .play-btn i::after { content: ''; border-left: 12px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 3px; }
+        .hero .period { margin: 14px 0 0; font-size: 14px; color: var(--brown-soft); }
+        .scroll-hint { position: absolute; left: 50%; bottom: 18px; z-index: 1; transform: translateX(-50%); width: 26px; height: 40px; border: 3px solid var(--brown-soft); border-radius: 14px; opacity: 0.6; }
+        .scroll-hint::after { content: ''; position: absolute; left: 50%; top: 6px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--brown-soft); animation: wheel 1.6s infinite; }
+        @keyframes wheel { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(12px); } }
+
+        /* ---------- 공통 칸 ---------- */
+        section { padding: 88px 0 24px; }
+        .sec-head { text-align: center; margin-bottom: 36px; }
+        .sec-head .tag { display: inline-block; font-family: 'Jua', sans-serif; font-size: 16px; color: #fff; background: var(--orange); padding: 4px 14px; border-radius: 999px; }
+        .sec-head h2 { margin: 10px 0 6px; font-size: clamp(30px, 4.6vw, 44px); line-height: 1.2; }
+        .sec-head p { margin: 0; color: var(--brown-soft); font-size: clamp(15px, 2.2vw, 18px); }
+
+        /* ---------- 사전등록 보상 ---------- */
+        .reward-box {
+            background: linear-gradient(160deg, #fff1cf, #ffd98f);
+            border: 4px solid #fff; border-radius: 32px; box-shadow: var(--shadow);
+            padding: 36px 20px 32px; text-align: center;
+        }
+        .reward-items { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-bottom: 24px; }
+        .reward-item { width: 200px; background: #fff; border-radius: var(--radius); padding: 18px 12px 16px; box-shadow: 0 6px 0 #f0c070; }
+        .reward-item img { height: 110px; width: auto; margin: 0 auto 8px; object-fit: contain; }
+        .reward-item img[src*="reward_party"] { width: 100%; height: 110px; object-fit: cover; border-radius: 14px; }
+        .reward-item { width: 220px; }
+        .reward-item .name { font-family: 'Jua', sans-serif; font-size: 24px; }
+        .reward-item .sub { font-size: 14px; color: var(--brown-soft); }
+        .reward-note { margin: 16px 0 0; font-size: 13px; color: var(--brown-soft); }
+        .set-show { margin-top: 28px; text-align: center; }
+        .set-show h3 { margin: 0 0 6px; font-size: clamp(24px, 4vw, 32px); }
+        .set-show h3 span { color: var(--orange-deep); }
+        .set-show p { margin: 0 auto 16px; max-width: 640px; color: var(--brown-soft); }
+        .set-shots { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .set-shots figure { margin: 0; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
+        .set-shots img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+        .set-shots figcaption { padding: 8px 0 10px; font-family: 'Jua', sans-serif; font-size: 18px; }
+        @media (min-width: 860px) { .set-shots { grid-template-columns: 1fr 1fr; } }
+
+        .stores { display: flex; gap: 10px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+        .store { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; }
+        .store img { height: 48px; width: auto; }
+        .store.soon img { filter: grayscale(1); opacity: 0.5; }
+        .store .note { font-size: 13px; color: var(--brown-soft); }
+
+        /* ---------- 게임 소개 ---------- */
+        .about { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+        .about .shot { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; }
+        .about .shot img { width: 100%; }
+        .about .shot .play-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        .points { display: grid; gap: 14px; }
+        .point { display: flex; gap: 14px; align-items: flex-start; background: #fff; border-radius: 20px; padding: 16px 18px; box-shadow: 0 6px 18px rgba(94, 54, 24, 0.08); }
+        .point .num { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--orange); color: #fff; font-family: 'Jua', sans-serif; font-size: 20px; }
+        .point h3 { margin: 0 0 2px; font-size: 22px; }
+        .point p { margin: 0; color: var(--brown-soft); font-size: 15px; }
+
+        /* ---------- 캐릭터 ---------- */
+        .chars { background: linear-gradient(180deg, var(--cream) 0%, #e8f6d8 100%); padding-bottom: 72px; }
+        .char-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
+        .char-tab { border: 3px solid transparent; background: #fff; cursor: pointer; border-radius: 50%; width: 76px; height: 76px; padding: 6px; box-shadow: 0 6px 16px rgba(94, 54, 24, 0.12); transition: transform 0.15s; }
+        .char-tab img { width: 100%; height: 100%; object-fit: contain; }
+        .char-tab.on { border-color: var(--orange); transform: translateY(-4px); }
+        .char-panel { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; background: #fff; border-radius: 32px; box-shadow: var(--shadow); padding: 24px 20px; }
+        .char-art { display: flex; justify-content: center; align-items: flex-end; min-height: 300px; border-radius: 24px; background: radial-gradient(circle at 50% 65%, #fff 0, var(--char-bg, #ffe3b8) 70%); }
+        .char-art img { max-height: 300px; width: auto; animation: bob 2.6s ease-in-out infinite; }
+        @keyframes bob { 50% { transform: translateY(-8px); } }
+        .char-info .role { display: inline-block; font-size: 14px; font-weight: 700; color: #fff; background: var(--char-color, var(--orange)); padding: 3px 12px; border-radius: 999px; }
+        .char-info h3 { margin: 8px 0 2px; font-size: 40px; line-height: 1.1; }
+        .char-info .kind { color: var(--brown-soft); margin-bottom: 14px; }
+        .skills { display: grid; gap: 8px; }
+        .skill { display: grid; grid-template-columns: 64px 1fr; gap: 10px; align-items: baseline; padding: 10px 12px; background: var(--cream); border-radius: 14px; }
+        .skill b { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 14px; color: var(--brown-soft); }
+        .skill .t { font-family: 'Jua', sans-serif; font-size: 19px; }
+        .skill .d { display: block; font-size: 14px; color: var(--brown-soft); }
+        .skill.ult { background: linear-gradient(90deg, #fff0d0, #ffe0a6); }
+        .skill.ult b { color: var(--orange-deep); }
+
+        /* ---------- 즐길 거리 ---------- */
+        .mode-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .mode-tab { border: 0; cursor: pointer; font-family: 'Jua', sans-serif; font-size: 18px; padding: 10px 20px; border-radius: 999px; background: #fff; color: var(--brown); box-shadow: 0 4px 12px rgba(94, 54, 24, 0.1); }
+        .mode-tab.on { background: var(--orange); color: #fff; }
+        .mode-view { background: #fff; border-radius: 32px; box-shadow: var(--shadow); overflow: hidden; }
+        .mode-view img { width: 100%; aspect-ratio: 2868 / 1320; object-fit: cover; }
+        .mode-view .body { padding: 20px 24px 26px; text-align: center; }
+        .mode-view h3 { margin: 0 0 6px; font-size: 28px; color: var(--orange-deep); }
+        .mode-view p { margin: 0 auto; max-width: 620px; color: var(--brown-soft); }
+
+        /* ---------- 꾸미기 ---------- */
+        .decor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .decor { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(94, 54, 24, 0.1); }
+        .decor img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+        .decor .cap { padding: 10px 14px 12px; }
+        .decor .cap b { display: block; font-family: 'Jua', sans-serif; font-weight: 400; font-size: 19px; }
+        .decor .cap span { font-size: 13px; color: var(--brown-soft); }
+        .decor-sub { margin: 30px 0 14px; text-align: center; font-size: 24px; }
+
+        /* ---------- 마지막 권유 ---------- */
+        .final { padding: 88px 0 80px; }
+        .final-box { text-align: center; border-radius: 32px; padding: 44px 20px 36px; background: linear-gradient(160deg, var(--orange-light), var(--orange)); box-shadow: var(--shadow); position: relative; overflow: hidden; }
+        .final-box h2 { margin: 0 0 8px; font-size: clamp(30px, 5vw, 46px); color: #fff; text-shadow: 0 3px 0 rgba(94, 54, 24, 0.35); position: relative; }
+        .final-box p { margin: 0 0 22px; color: #5a3215; font-weight: 500; position: relative; }
+        .final-box .stores { position: relative; }
+        .final-box .store .note { color: #5a3215; }
+        .final-box .peek { position: absolute; bottom: -10px; height: 150px; width: auto; }
+        .final-box .peek.l { left: 3%; }
+        .final-box .peek.r { right: 3%; }
+
+        /* ---------- 회사 정보 ---------- */
+        footer { background: #4a2a12; color: #e9d6c3; padding: 34px 0 40px; font-size: 13px; line-height: 1.8; }
+        footer .links { margin-bottom: 12px; }
+        footer .links a { color: #fff; font-weight: 700; margin-right: 16px; text-decoration: none; }
+        footer .copy { margin-top: 10px; color: #b99a80; }
+        footer .nw { white-space: nowrap; }
+
+        /* ---------- 아래 고정 단추 (폰) ---------- */
+        .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(255, 247, 232, 0.95); box-shadow: 0 -4px 16px rgba(94, 54, 24, 0.12); display: none; }
+        .sticky-cta .btn { width: 100%; font-size: 21px; padding: 15px; }
+
+        /* ---------- 영상 창 ---------- */
+        .modal { position: fixed; inset: 0; z-index: 100; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; padding: 16px; }
+        .modal.open { display: flex; }
+        .modal video { width: 100%; max-width: 960px; border-radius: 16px; background: #000; }
+        .modal .close { position: absolute; top: 14px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fff; font-size: 26px; line-height: 1; cursor: pointer; color: var(--brown); }
+
+        /* 나타나며 올라오기 */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .char-art img, .scroll-hint::after { animation: none; } }
+
+        @media (min-width: 860px) {
+            .about { grid-template-columns: 1.25fr 1fr; }
+            .char-panel { grid-template-columns: 1fr 1.1fr; padding: 32px; }
+            .char-art { min-height: 420px; }
+            .char-art img { max-height: 400px; }
+            .decor-grid { grid-template-columns: repeat(4, 1fr); }
+            .decor-grid.two { grid-template-columns: repeat(2, 1fr); max-width: 560px; margin: 0 auto; }
+            .store img { height: 56px; }
+        }
+        @media (max-width: 859px) {
+            :root { --header-h: 56px; }
+            .header .logo img { height: 28px; }
+            .nav, .header .cta { display: none; }
+            .menu-btn { display: block; }
+            .nav.open {
+                display: flex; flex-direction: column; position: absolute; top: var(--header-h); left: 0; right: 0; margin: 0;
+                background: var(--cream); padding: 8px 16px 16px; box-shadow: 0 10px 20px rgba(94, 54, 24, 0.15);
+            }
+            .nav.open a { font-size: 20px; padding: 12px 8px; border-radius: 12px; }
+            .hero-inner { padding: 6px 16px 8px; margin-top: -16px; }
+            .scroll-hint { display: none; }
+            .hero .row .btn.big { display: none; }
+            .sticky-cta { display: block; }
+            footer { padding-bottom: 110px; }
+            section { padding-top: 64px; }
+            .final-box .peek { display: none; }
+            .sec-head h2 { font-size: 27px; }
+            .char-tabs { gap: 8px; flex-wrap: nowrap; }
+            .store img { height: 42px; }
+            .reward-box { padding: 30px 14px 26px; }
+            .char-tab { width: 60px; height: 60px; padding: 4px; }
+            .char-art { min-height: 230px; }
+            .char-art img { max-height: 220px; }
+            .char-info h3 { font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="wrap">
+            <a class="logo" href="#top" aria-label="카파우 처음으로"><img src="img/logo.webp" width="900" height="243" alt="KaPaw"></a>
+            <nav class="nav" data-nav>
+                <a href="#reward">사전등록 보상</a>
+                <a href="#about">게임 소개</a>
+                <a href="#characters">캐릭터</a>
+                <a href="#modes">즐길 거리</a>
+                <a href="#decor">꾸미기</a>
+            </nav>
+            <a class="btn cta" href="#reward">사전등록</a>
+            <button class="menu-btn" type="button" aria-label="메뉴 열기" data-menu><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 첫 화면 (PC: 꽉 찬 배경, 폰: 그림 + 아래 글) -->
+        <div class="hero" id="top">
+            <picture>
+                <source media="(max-width: 859px)" srcset="img/hero_m.webp" width="900" height="604">
+                <img class="hero-img" src="img/hero.webp" width="1920" height="799" alt="카파우: 꽃밭에 모인 동물 친구 다섯 마리">
+            </picture>
+            <div class="hero-inner">
+                <h1>귀여운 동물 친구들과<br>1:1 실시간 퍼즐 대결!</h1>
+                <p class="lead">같은 동물 셋을 맞추면 상대에게 공격이 날아가요</p>
+                <div class="row">
+                    <a class="btn big" href="#reward">사전등록하기</a>
+                    <button class="play-btn" type="button" data-video><i></i>영상 보기</button>
+                </div>
+                <p class="period" data-period></p>
+            </div>
+            <span class="scroll-hint" aria-hidden="true"></span>
+        </div>
+
+        <!-- 사전등록 보상 -->
+        <section id="reward">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="tag">사전등록 이벤트</span>
+                    <h2>사전등록하고 선물 받기!</h2>
+                    <p>스토어에서 사전등록하고, 출시 후 게임에 들어오면 우편함으로 받아요</p>
+                </div>
+                <div class="reward-box reveal">
+                    <div class="reward-items" data-rewards></div>
+                    <div class="stores" data-stores></div>
+                    <p class="reward-note">※ 보상은 출시 후 사전등록한 계정으로 게임에 들어오면 우편함으로 지급돼요. 자세한 내용은 출시 공지를 확인해 주세요.</p>
+                </div>
+                <div class="set-show reveal">
+                    <h3>사전등록 한정 <span>오크나무 축제</span> 세트</h3>
+                    <p>해 진 저녁, 오크나무 집 마을의 축제. 하늘에서 폭죽이 터지고 풍선이 떠올라요. 타일이 터질 때 색종이가 팡! 이기면 폭죽 쇼까지.</p>
+                    <div class="set-shots">
+                        <figure><img src="img/party_lobby.webp" width="1200" height="670" loading="lazy" alt="오크나무 축제 로비"><figcaption>로비</figcaption></figure>
+                        <figure><img src="img/party_battle.webp" width="600" height="398" loading="lazy" alt="오크나무 축제 대전 화면"><figcaption>대전</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="about">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="tag">게임 소개</span>
+                    <h2>한 판 1분 남짓, 짧고 시원한 승부</h2>
+                    <p>나와 상대가 각자의 판에서 동시에 퍼즐을 풀어요</p>
+                </div>
+                <div class="about">
+                    <div class="shot reveal" data-video>
+                        <img src="img/08_battle_combo.webp" width="1280" height="589" loading="lazy" alt="퍼즐 대전 화면, 콤보 x27">
+                        <button class="play-btn" type="button"><i></i>30초 영상</button>
+                    </div>
+                    <div class="points">
+                        <div class="point reveal"><span class="num">1</span><div><h3>맞출수록 강한 공격</h3><p>같은 동물 셋을 맞추면 상대 체력이 줄고, 연쇄가 길수록 공격이 세져요.</p></div></div>
+                        <div class="point reveal"><span class="num">2</span><div><h3>스킬로 판을 흔들어라</h3><p>얼음, 돌, 출혈, 회복… 친구마다 다른 스킬로 상대를 방해하거나 나를 지켜요.</p></div></div>
+                        <div class="point reveal"><span class="num">3</span><div><h3>특수 타일로 한 번에 역전</h3><p>4개는 로켓, L·T자는 폭탄, 5개는 길을 직접 그려 터뜨리는 완드!</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 캐릭터 -->
+        <section id="characters" class="chars">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="tag">캐릭터</span>
+                    <h2>다섯 동물 친구</h2>
+                    <p>누구와 함께할지 골라 보세요. 레벨을 올리면 더 강해져요</p>
+                </div>
+                <div class="char-tabs" data-char-tabs></div>
+                <div class="char-panel reveal">
+                    <div class="char-art" data-char-art><img src="img/char_dog.webp" alt=""></div>
+                    <div class="char-info">
+                        <span class="role" data-char-role></span>
+                        <h3 data-char-name></h3>
+                        <div class="kind" data-char-kind></div>
+                        <div class="skills" data-char-skills></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 즐길 거리 -->
+        <section id="modes">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="tag">즐길 거리</span>
+                    <h2>대전부터 모험까지</h2>
+                    <p>혼자서도, 친구와도 즐길 거리가 가득해요</p>
+                </div>
+                <div class="mode-tabs" data-mode-tabs></div>
+                <div class="mode-view reveal">
+                    <img data-mode-img src="img/08_battle_combo.webp" width="1280" height="589" alt="">
+                    <div class="body"><h3 data-mode-title></h3><p data-mode-desc></p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 꾸미기 -->
+        <section id="decor">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="tag">꾸미기</span>
+                    <h2>내 마음대로 꾸며요</h2>
+                    <p>로비 배경, 음악, 터치 효과까지 테마로 바꾸고, 대전 판은 전투 스킨으로</p>
+                </div>
+                <h3 class="decor-sub reveal">테마</h3>
+                <div class="decor-grid">
+                    <div class="decor reveal"><img src="img/theme_meadow.webp" loading="lazy" alt="들판 테마"><div class="cap"><b>들판</b><span>기본 테마</span></div></div>
+                    <div class="decor reveal"><img src="img/theme_winter.webp" loading="lazy" alt="눈 내리는 마을 테마"><div class="cap"><b>눈 내리는 마을</b><span>소복소복 눈 내리는 로비</span></div></div>
+                    <div class="decor reveal"><img src="img/theme_halloween.webp" loading="lazy" alt="호박 축제 테마"><div class="cap"><b>호박 축제</b><span>으스스 귀여운 핼러윈</span></div></div>
+                    <div class="decor reveal"><img src="img/theme_xmas.webp" loading="lazy" alt="크리스마스 마을 테마"><div class="cap"><b>크리스마스 마을</b><span>전투까지 크리스마스</span></div></div>
+                </div>
+                <h3 class="decor-sub reveal">전투 스킨</h3>
+                <div class="decor-grid two">
+                    <div class="decor reveal"><img src="img/skin_gold.webp" loading="lazy" alt="황금 궁전 전투 스킨"><div class="cap"><b>황금 궁전</b><span>금 테두리 · 왕관 · 금빛 배경</span></div></div>
+                    <div class="decor reveal"><img src="img/skin_neon.webp" loading="lazy" alt="네온 아케이드 전투 스킨"><div class="cap"><b>네온 아케이드</b><span>네온 테두리 · 빛 격자 배경</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 마지막 권유 -->
+        <div class="final">
+            <div class="wrap">
+                <div class="final-box reveal">
+                    <img class="peek l" src="img/char_fox.webp" alt="" loading="lazy">
+                    <img class="peek r" src="img/char_penguin.webp" alt="" loading="lazy">
+                    <h2>지금 바로 사전등록!</h2>
+                    <p>무료로 즐기고, 친구와 실력을 겨뤄 보세요</p>
+                    <div class="stores" data-stores></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="links">
+                <a href="terms.html">이용약관</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="../index.html">회사 소개</a>
+            </div>
+            <div><span class="nw">주식회사 원인터네셔널</span> · <span class="nw">대표 최선웅</span> · <span class="nw">사업자등록번호 547-86-03664</span></div>
+            <div>충북 청주시 청원구 내수읍 은곡묵방길 52-10 203동 402호</div>
+            <div>고객 문의 admin@oneintl2025.com</div>
+            <div class="copy">© ONE INTERNATIONAL Co., Ltd. All Rights Reserved. · 게임은 무료이며 일부 유료 아이템을 판매합니다.</div>
+        </div>
+    </footer>
+
+    <div class="sticky-cta"><a class="btn" href="#reward">사전등록하기</a></div>
+
+    <div class="modal" data-modal role="dialog" aria-label="카파우 영상">
+        <button class="close" type="button" aria-label="닫기" data-close>×</button>
+        <video data-player src="media/trailer.mp4" poster="media/trailer_poster.jpg" controls playsinline preload="none"></video>
+    </div>
+
+    <script>
+        // ===== 여기만 바꾸면 됨 =====
+        var CONFIG = {
+            playUrl: 'https://play.google.com/store/apps/details?id=com.one.kapaw',
+            appStoreUrl: '',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
+            period: '사전등록 진행 중 · 출시 일정은 곧 알려 드려요',
+            // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
+            rewards: [
+                { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '캐릭터 한 명 바로 데려오기' },
+                { img: 'img/reward_party.webp', name: '오크나무 축제 세트', sub: '사전등록 한정 · 로비·전투·음악·효과' }
+            ]
+        };
+
+        var CHARS = [
+            { id: 'dog', name: '맥스', kind: '코기', role: '공격', color: '#e8792c', bg: '#ffe3b8',
+              skills: [['할퀴기', '상대 체력 5% 데미지'], ['연속 물기', '상대 체력 2%씩 세 번 물기'], ['으르렁', '출혈! 6초 동안 상대 체력 9%'], ['하울링', '상대 체력 21% 데미지']] },
+            { id: 'rabbit', name: '코코', kind: '토끼', role: '회복', color: '#e86aa0', bg: '#ffe0ec',
+              skills: [['당근', '6초 동안 내 HP 13% 회복'], ['깨끗이', '내 판의 돌·얼음 치우기 + HP 5% 회복'], ['클로버 보호막', '자동 보호막, 깨지면 다음 것이 켜짐'], ['달토끼의 축복', 'HP 15% 회복 + 보호막 19%']] },
+            { id: 'penguin', name: '민트', kind: '펭귄', role: '방해', color: '#3d8fd8', bg: '#dceeff',
+              skills: [['얼음', '얼음 2칸 + 상대 체력 2% 데미지'], ['고드름', '세 번 두드려야 깨지는 얼음 2칸'], ['한파', '6초 동안 눈! 상대 타일이 50% 느려짐'], ['블리자드', '얼음 6칸 + 6초 동안 100% 느려짐']] },
+            { id: 'panda', name: '록키', kind: '판다', role: '돌 던지기', color: '#5b6b7a', bg: '#e6ece6',
+              skills: [['바위', '돌 1개, 쿵! 돌마다 상대 체력 4%'], ['바위 벽', '가운데에 돌벽 2개'], ['단단하게', '금 간 돌을 다시 단단하게 + 돌 1개'], ['낙석', '돌 5개, 쿵쿵! 돌마다 상대 체력 4%']] },
+            { id: 'fox', name: '나인', kind: '여우', role: '특수 타일', color: '#d8572a', bg: '#ffe0cc',
+              skills: [['여우불', '잠든 특수 타일 2개 (매치에 섞이면 터짐)'], ['둔갑', '잠든 특수 타일을 모두 깨움'], ['홀리기', '10초 동안 콤보가 안 끊기고 2배로 쌓임'], ['구미호', '특수 타일 7개']] }
+        ];
+
+        var MODES = [
+            { name: '실시간 대전', img: 'img/08_battle_combo.webp', title: '실시간 1:1 대전', desc: '랜덤 상대와 겨뤄 트로피를 모으고, 친구에게 대전을 신청해 실력을 겨뤄요.' },
+            { name: '모험', img: 'img/04_map.webp', title: '모험 100 스테이지', desc: '바닷가, 사막, 버섯숲, 유령성, 얼음 동굴, 화산, 하늘섬까지 10개 지역. 지역마다 새로운 장치와 보스가 기다려요. 쉬움·보통·어려움 세 난이도.' },
+            { name: '퍼즐', img: 'img/06_puzzle.webp', title: '퍼즐과 오늘의 퍼즐', desc: '정해진 턴 안에 목표를 이루는 퍼즐, 매일 새로 바뀌는 오늘의 퍼즐로 머리를 써 보세요.' },
+            { name: '도전 탑', img: 'img/05_tower.webp', title: '도전 탑', desc: '한 층씩 올라가며 실력을 시험하고, 이번 주 순위에 이름을 올려요.' }
+        ];
+
+        // 광고 링크의 utm_* 를 Play 설치 기록(referrer)으로 넘김 → Play 콘솔 '획득 보고서'에서 광고별로 봄
+        function playLink() {
+            var q = new URLSearchParams(location.search), keep = [];
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+                if (q.get(k)) keep.push(k + '=' + encodeURIComponent(q.get(k)));
+            });
+            if (!keep.length) keep.push('utm_source=kapaw_landing', 'utm_medium=web');
+            return CONFIG.playUrl + '&referrer=' + encodeURIComponent(keep.join('&'));
+        }
+
+        function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+        function storeButton(href, img, alt, note) {
+            var a = el(href ? 'a' : 'div', 'store' + (href ? '' : ' soon'));
+            if (href) { a.href = href; a.target = '_blank'; a.rel = 'noopener'; }
+            var i = el('img'); i.src = img; i.alt = alt; a.appendChild(i);
+            if (note) a.appendChild(el('span', 'note', note));
+            return a;
+        }
+
+        document.querySelectorAll('[data-stores]').forEach(function (box) {
+            box.appendChild(storeButton(playLink(), 'img/google_play_en.png', 'GET IT ON Google Play'));
+            box.appendChild(CONFIG.appStoreUrl
+                ? storeButton(CONFIG.appStoreUrl, 'img/app_store_en.svg', 'Download on the App Store')
+                : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '출시 예정'));
+        });
+        document.querySelector('[data-period]').textContent = CONFIG.period;
+
+        var rewards = document.querySelector('[data-rewards]');
+        CONFIG.rewards.forEach(function (r) {
+            var d = el('div', 'reward-item'), i = el('img'); i.src = r.img; i.alt = '';
+            d.appendChild(i); d.appendChild(el('div', 'name', r.name)); d.appendChild(el('div', 'sub', r.sub));
+            rewards.appendChild(d);
+        });
+
+        // 캐릭터 탭
+        var tabs = document.querySelector('[data-char-tabs]');
+        function showChar(c) {
+            var panel = document.querySelector('.char-panel');
+            panel.style.setProperty('--char-color', c.color);
+            panel.style.setProperty('--char-bg', c.bg);
+            var art = document.querySelector('[data-char-art] img');
+            art.src = 'img/char_' + c.id + '.webp'; art.alt = c.kind + ' ' + c.name;
+            document.querySelector('[data-char-role]').textContent = c.role;
+            document.querySelector('[data-char-name]').textContent = c.name;
+            document.querySelector('[data-char-kind]').textContent = c.kind;
+            var list = document.querySelector('[data-char-skills]'); list.innerHTML = '';
+            c.skills.forEach(function (s, i) {
+                var row = el('div', 'skill' + (i === 3 ? ' ult' : ''));
+                row.appendChild(el('b', null, i === 3 ? '궁극기' : '스킬 ' + (i + 1)));
+                var t = el('span'); t.appendChild(el('span', 't', s[0])); t.appendChild(el('span', 'd', s[1]));
+                row.appendChild(t); list.appendChild(row);
+            });
+            tabs.querySelectorAll('.char-tab').forEach(function (b) { b.classList.toggle('on', b.dataset.id === c.id); });
+        }
+        CHARS.forEach(function (c) {
+            var b = el('button', 'char-tab'); b.type = 'button'; b.dataset.id = c.id; b.setAttribute('aria-label', c.name);
+            var i = el('img'); i.src = 'img/char_' + c.id + '.webp'; i.alt = ''; b.appendChild(i);
+            b.addEventListener('click', function () { showChar(c); });
+            tabs.appendChild(b);
+        });
+        showChar(CHARS[0]);
+
+        // 즐길 거리 탭 (6초마다 다음으로, 누르면 멈춤)
+        var modeTabs = document.querySelector('[data-mode-tabs]'), modeIndex = 0, modeTimer;
+        function showMode(i) {
+            modeIndex = i; var m = MODES[i];
+            var img = document.querySelector('[data-mode-img]'); img.src = m.img; img.alt = m.title;
+            document.querySelector('[data-mode-title]').textContent = m.title;
+            document.querySelector('[data-mode-desc]').textContent = m.desc;
+            modeTabs.querySelectorAll('.mode-tab').forEach(function (b, k) { b.classList.toggle('on', k === i); });
+        }
+        MODES.forEach(function (m, i) {
+            var b = el('button', 'mode-tab', m.name); b.type = 'button';
+            b.addEventListener('click', function () { clearInterval(modeTimer); showMode(i); });
+            modeTabs.appendChild(b);
+        });
+        showMode(0);
+        modeTimer = setInterval(function () { showMode((modeIndex + 1) % MODES.length); }, 6000);
+
+        // 메뉴 (폰)
+        var nav = document.querySelector('[data-nav]');
+        document.querySelector('[data-menu]').addEventListener('click', function () { nav.classList.toggle('open'); });
+        nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); }); });
+
+        // 지금 보는 칸을 메뉴에 표시
+        var links = nav.querySelectorAll('a');
+        var spy = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); }); });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+
+        // 나타나며 올라오기
+        var rv = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(function (e) { rv.observe(e); });
+
+        // 영상 창
+        var modal = document.querySelector('[data-modal]'), player = document.querySelector('[data-player]');
+        document.querySelectorAll('[data-video]').forEach(function (b) {
+            b.addEventListener('click', function () { modal.classList.add('open'); player.play().catch(function () {}); });
+        });
+        function closeVideo() { player.pause(); modal.classList.remove('open'); }
+        document.querySelector('[data-close]').addEventListener('click', closeVideo);
+        modal.addEventListener('click', function (e) { if (e.target === modal) closeVideo(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeVideo(); });
+    </script>
+</body>
+</html>
