@@ -175,9 +175,14 @@
 
         /* ---------- 게임 소개 ---------- */
         .about { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
-        .about .shot { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; }
-        .about .shot img { width: 100%; }
-        .about .shot .play-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        .about .shot { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #000; aspect-ratio: 16 / 9; }
+        .about .shot video { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .sound-btn {
+            position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255, 255, 255, 0.94); border: 0; cursor: pointer; box-shadow: var(--shadow);
+            font-family: 'Jua', sans-serif; font-size: 16px; color: var(--brown); padding: 8px 14px; border-radius: 999px;
+        }
+        .sound-btn i { width: 0; height: 0; border-left: 0 solid transparent; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-right: 10px solid var(--orange); }
         .points { display: grid; gap: 14px; }
         .point { display: flex; gap: 14px; align-items: flex-start; background: #fff; border-radius: 20px; padding: 16px 18px; box-shadow: 0 6px 18px rgba(94, 54, 24, 0.08); }
         .point .num { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--orange); color: #fff; font-family: 'Jua', sans-serif; font-size: 20px; }
@@ -247,10 +252,6 @@
         .sticky-cta .btn { width: 100%; font-size: 21px; padding: 15px; }
 
         /* ---------- 영상 창 ---------- */
-        .modal { position: fixed; inset: 0; z-index: 100; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; padding: 16px; }
-        .modal.open { display: flex; }
-        .modal video { width: 100%; max-width: 960px; border-radius: 16px; background: #000; }
-        .modal .close { position: absolute; top: 14px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fff; font-size: 26px; line-height: 1; cursor: pointer; color: var(--brown); }
 
         /* 나타나며 올라오기 */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
@@ -258,7 +259,8 @@
         @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .char-art img, .scroll-hint::after { animation: none; } }
 
         @media (min-width: 860px) {
-            .about { grid-template-columns: 1.25fr 1fr; }
+            .about { grid-template-columns: 1fr; }   /* 트레일러를 가로 전체로 크게, 설명 셋은 아래 한 줄 (2026-10-27) */
+            .about .points { grid-template-columns: repeat(3, 1fr); }
             .char-panel { grid-template-columns: 1fr 1.1fr; padding: 32px; }
             .char-art { min-height: 420px; }
             .char-art img { max-height: 400px; }
@@ -379,9 +381,10 @@
                     <p>상대와 동시에 퍼즐을 풀고, 먼저 쓰러뜨리면 승리.</p>
                 </div>
                 <div class="about">
-                    <div class="shot reveal" data-video>
-                        <img src="img/08_battle_combo.webp" width="1280" height="589" loading="lazy" alt="퍼즐 대전 화면, 콤보 x27">
-                        <button class="play-btn" type="button"><i></i>트레일러</button>
+                    <!-- 트레일러: 누르지 않아도 화면에 들어오면 소리 없이 바로 재생 (2026-10-27 사용자), 소리는 단추로 -->
+                    <div class="shot reveal" id="trailer">
+                        <video data-inline src="media/trailer.mp4" poster="media/trailer_poster.jpg" muted loop playsinline preload="none" aria-label="카파우 트레일러"></video>
+                        <button class="sound-btn" type="button" data-sound><i></i><span>소리 켜기</span></button>
                     </div>
                     <div class="points">
                         <div class="point reveal"><span class="num">1</span><div><h3>연쇄 공격</h3><p>연쇄가 길어질수록 공격이 강해집니다.</p></div></div>
@@ -482,10 +485,6 @@
 
     <div class="sticky-cta"><a class="btn" href="#reward">사전등록하기</a></div>
 
-    <div class="modal" data-modal role="dialog" aria-label="카파우 영상">
-        <button class="close" type="button" aria-label="닫기" data-close>×</button>
-        <video data-player src="media/trailer.mp4" poster="media/trailer_poster.jpg" controls playsinline preload="none"></video>
-    </div>
 
     <script>
         // ===== 여기만 바꾸면 됨 =====
@@ -665,15 +664,28 @@
         }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(function (e) { rv.observe(e); });
 
-        // 영상 창
-        var modal = document.querySelector('[data-modal]'), player = document.querySelector('[data-player]');
+        // 트레일러: 화면에 들어오면 소리 없이 재생, 벗어나면 멈춤 (브라우저는 소리 있는 자동 재생을 막음 → 소리는 단추로)
+        var trailer = document.querySelector('[data-inline]'), soundBtn = document.querySelector('[data-sound]');
+        function setSound(on) {
+            trailer.muted = !on;
+            soundBtn.querySelector('span').textContent = on ? '소리 끄기' : '소리 켜기';
+        }
+        new IntersectionObserver(function (es) {
+            es.forEach(function (e) {
+                if (e.isIntersecting) { if (trailer.preload === 'none') trailer.preload = 'auto'; trailer.play().catch(function () {}); }
+                else trailer.pause();
+            });
+        }, { threshold: 0.35 }).observe(trailer);
+        soundBtn.addEventListener('click', function () { setSound(trailer.muted); trailer.play().catch(function () {}); });
+        // 첫 화면 [트레일러]: 영상으로 내려가 처음부터 소리 켜고 재생
         document.querySelectorAll('[data-video]').forEach(function (b) {
-            b.addEventListener('click', function () { modal.classList.add('open'); player.play().catch(function () {}); });
+            b.addEventListener('click', function () {
+                document.getElementById('trailer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                trailer.currentTime = 0;
+                setSound(true);
+                trailer.play().catch(function () {});
+            });
         });
-        function closeVideo() { player.pause(); modal.classList.remove('open'); }
-        document.querySelector('[data-close]').addEventListener('click', closeVideo);
-        modal.addEventListener('click', function (e) { if (e.target === modal) closeVideo(); });
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeVideo(); });
     </script>
 </body>
 </html>
