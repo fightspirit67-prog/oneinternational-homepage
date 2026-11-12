@@ -495,15 +495,17 @@
         // ===== 여기만 바꾸면 됨 =====
         var CONFIG = {
             playUrl: 'https://play.google.com/store/apps/details?id=com.one.kapaw',
-            appStoreUrl: '',
+            appStoreUrl: 'https://apps.apple.com/app/id6821535063', // 출시 전에는 단추가 안 보이므로 미리 넣어 둠
             // 휴대폰 번호 사전등록 서버 함수 (Firebase/functions/preregister.js). 이 PC에서 띄운 시험 페이지는 개발 서버로
             preregisterUrl: /^(127\.0\.0\.1|localhost)$/.test(location.hostname)
                 ? 'https://asia-northeast3-kapaw-dev.cloudfunctions.net/preregisterPhone'
                 : 'https://asia-northeast3-kapaw-prod.cloudfunctions.net/preregisterPhone',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
             period: '11월 26일 출시 · 사전등록 진행 중',
-            // 출시 전에는 스토어 단추를 '출시 예정'으로 흐리게 (2026-11-13: 플레이 페이지는 출시 전 일반 사용자에게 404). 출시 날 true로
+            // 출시 전에는 스토어 단추 대신 D-day (2026-11-13: 플레이 페이지는 출시 전 일반 사용자에게 404, 흐린 단추는 사기처럼 보임).
+            // launchAt(한국 시각)이 지나면 저절로 스토어 단추로 바뀜. 공개가 늦어지면 launchAt을 미루고, 일찍 열면 launched: true
             launched: false,
             launchDate: '2026-11-26',
+            launchAt: '2026-11-26T10:00:00+09:00',
             // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
             rewards: [
                 { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '사전등록 보상' },
@@ -551,7 +553,7 @@
             return a;
         }
 
-        // 출시 전: 흐린 스토어 단추 대신 D-day와 출시일 (출시 날 CONFIG.launched = true)
+        // 출시 전: 스토어 단추 대신 D-day와 출시일 (CONFIG.launchAt이 지나면 저절로 스토어 단추)
         function launchDay() {
             var d = el('div', 'launch-day');
             var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
@@ -560,8 +562,9 @@
             var t = el('span'); t.innerHTML = '11월 26일 출시<br><span class="nw">Google Play · App Store</span>'; d.appendChild(t);
             return d;
         }
+        var launched = CONFIG.launched || Date.now() >= new Date(CONFIG.launchAt).getTime();
         document.querySelectorAll('[data-stores]').forEach(function (box) {
-            if (!CONFIG.launched) {
+            if (!launched) {
                 box.appendChild(launchDay());
                 if (box.closest('.final-box')) { var c = el('a', 'btn big launch-cta', '사전등록하기'); c.href = '#reward'; box.parentNode.appendChild(c); }
                 return;
@@ -571,7 +574,8 @@
                 ? storeButton(CONFIG.appStoreUrl, 'img/app_store_en.svg', 'Download on the App Store')
                 : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '11월 26일 출시'));
         });
-        document.querySelector('[data-period]').textContent = CONFIG.period;
+        document.querySelector('[data-period]').textContent = launched ? '지금 출시! 사전등록 보상은 우편함으로' : CONFIG.period;
+        if (launched) document.querySelectorAll('.or-store').forEach(function (e) { e.textContent = 'Google Play · App Store에서 지금 받으세요'; });
 
         // 휴대폰 번호 사전등록
         (function () {
