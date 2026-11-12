@@ -172,6 +172,11 @@
         .store img { height: 48px; width: auto; }
         .store.soon img { filter: grayscale(1); opacity: 0.5; }
         .store .note { font-size: 13px; color: var(--brown-soft); }
+        /* 출시 전: 스토어 단추 대신 출시일 (2026-11-13 대표: 흐린 단추는 사기처럼 보임) */
+        .launch-day { display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px; border-radius: 16px; background: #fff; box-shadow: 0 4px 0 rgba(90,50,21,.12); }
+        .launch-day b { font-family: 'Montserrat', sans-serif; font-size: 26px; color: var(--orange-deep); white-space: nowrap; flex: none; }
+        .launch-day span { font-size: 15px; font-weight: 700; color: #5a3215; line-height: 1.35; text-align: left; }
+        .final-box .launch-cta { display: inline-block; margin-top: 4px; }
 
         /* ---------- 게임 소개 ---------- */
         .about { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
@@ -245,7 +250,7 @@
         footer .links { margin-bottom: 12px; }
         footer .links a { color: #fff; font-weight: 700; margin-right: 16px; text-decoration: none; }
         footer .copy { margin-top: 10px; color: #b99a80; }
-        footer .nw { white-space: nowrap; }
+        footer .nw, .launch-day .nw { white-space: nowrap; }
 
         /* ---------- 아래 고정 단추 (폰) ---------- */
         .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(255, 247, 232, 0.95); box-shadow: 0 -4px 16px rgba(94, 54, 24, 0.12); display: none; }
@@ -357,7 +362,7 @@
                         </div>
                         <p class="prereg-msg" data-msg role="status"></p>
                     </form>
-                    <p class="or-store">11월 26일 Google Play · App Store 동시 출시</p>
+                    <p class="or-store">출시 날 설치 링크를 문자로 보내 드립니다</p>
                     <div class="stores" data-stores></div>
                     <p class="reward-note">※ 지급 기간과 세부 내용은 출시 공지에서 안내합니다.</p>
                 </div>
@@ -498,6 +503,7 @@
             period: '11월 26일 출시 · 사전등록 진행 중',
             // 출시 전에는 스토어 단추를 '출시 예정'으로 흐리게 (2026-11-13: 플레이 페이지는 출시 전 일반 사용자에게 404). 출시 날 true로
             launched: false,
+            launchDate: '2026-11-26',
             // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
             rewards: [
                 { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '사전등록 보상' },
@@ -545,11 +551,23 @@
             return a;
         }
 
+        // 출시 전: 흐린 스토어 단추 대신 D-day와 출시일 (출시 날 CONFIG.launched = true)
+        function launchDay() {
+            var d = el('div', 'launch-day');
+            var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+            var left = Math.ceil((new Date(CONFIG.launchDate + 'T00:00:00') - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+            d.appendChild(el('b', null, left > 0 ? 'D-' + left : 'D-DAY'));
+            var t = el('span'); t.innerHTML = '11월 26일 출시<br><span class="nw">Google Play · App Store</span>'; d.appendChild(t);
+            return d;
+        }
         document.querySelectorAll('[data-stores]').forEach(function (box) {
-            box.appendChild(CONFIG.launched
-                ? storeButton(playLink(), 'img/google_play_en.png', 'GET IT ON Google Play')
-                : storeButton('', 'img/google_play_en.png', 'Google Play 출시 예정', '11월 26일 출시'));
-            box.appendChild(CONFIG.launched && CONFIG.appStoreUrl
+            if (!CONFIG.launched) {
+                box.appendChild(launchDay());
+                if (box.closest('.final-box')) { var c = el('a', 'btn big launch-cta', '사전등록하기'); c.href = '#reward'; box.parentNode.appendChild(c); }
+                return;
+            }
+            box.appendChild(storeButton(playLink(), 'img/google_play_en.png', 'GET IT ON Google Play'));
+            box.appendChild(CONFIG.appStoreUrl
                 ? storeButton(CONFIG.appStoreUrl, 'img/app_store_en.svg', 'Download on the App Store')
                 : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '11월 26일 출시'));
         });
