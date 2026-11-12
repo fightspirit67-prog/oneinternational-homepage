@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <title>카파우: 동물 퍼즐 대전 | 사전등록</title>
-    <meta name="description" content="동물 친구들과 펼치는 실시간 1:1 퍼즐 대전, 카파우. 사전등록 진행 중.">
+    <meta name="description" content="동물 친구들과 펼치는 3:3 실시간 퍼즐 대전, 카파우. 11월 26일 출시, 사전등록 진행 중.">
     <link rel="icon" href="img/icon.png">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="카파우">
     <meta property="og:title" content="카파우: 동물 퍼즐 대전">
-    <meta property="og:description" content="동물 친구들과 펼치는 실시간 1:1 퍼즐 대전. 사전등록 진행 중.">
+    <meta property="og:description" content="동물 친구들과 펼치는 3:3 실시간 퍼즐 대전. 11월 26일 출시, 사전등록 진행 중.">
     <meta property="og:url" content="https://oneintl2025.com/kapaw/">
     <meta property="og:image" content="https://oneintl2025.com/kapaw/img/og.jpg">
     <meta property="og:image:width" content="1200">
@@ -321,7 +321,7 @@
             </picture>
             <div class="hero-inner">
                 <h1>귀여움은 기본,<br>승부는 진지하게</h1>
-                <p class="lead">동물 친구들과 펼치는 실시간 1:1 퍼즐 대전</p>
+                <p class="lead">동물 친구들과 펼치는 3:3 실시간 퍼즐 대전</p>
                 <div class="row">
                     <a class="btn big" href="#reward">사전등록하기</a>
                     <button class="play-btn" type="button" data-video><i></i>트레일러</button>
@@ -350,14 +350,14 @@
                         <div class="agree">
                             <label class="all"><input type="checkbox" data-all>모두 동의합니다</label>
                             <label><input type="checkbox" name="privacy"><span><span class="req">[필수]</span> 개인정보 수집·이용 동의</span><button class="more" type="button" data-more="d-privacy">보기</button></label>
-                            <div class="detail" id="d-privacy"><b>수집 항목</b> 휴대폰 번호<br><b>목적</b> 카파우 출시 알림과 사전등록 보상 안내 문자 발송<br><b>보유 기간</b> 출시 알림 발송 후 30일 이내 파기<br>동의를 거부할 수 있으며, 거부하면 문자 사전등록을 할 수 없습니다. 스토어 사전등록은 그대로 이용할 수 있습니다. <a href="privacy.html#prereg" target="_blank">개인정보처리방침</a></div>
+                            <div class="detail" id="d-privacy"><b>수집 항목</b> 휴대폰 번호<br><b>목적</b> 카파우 출시 알림과 사전등록 보상 안내 문자 발송<br><b>보유 기간</b> 출시 알림 발송 후 30일 이내 파기<br>동의를 거부할 수 있으며, 거부하면 문자 사전등록을 할 수 없습니다. <a href="privacy.html#prereg" target="_blank">개인정보처리방침</a></div>
                             <label><input type="checkbox" name="sms"><span><span class="req">[필수]</span> 광고성 정보 문자 수신 동의</span><button class="more" type="button" data-more="d-sms">보기</button></label>
                             <div class="detail" id="d-sms">카파우 출시 소식과 사전등록 보상 안내를 문자로 받습니다. 문자에 적힌 무료 수신거부 번호나 고객 지원 이메일(admin@oneintl2025.com)로 언제든지 철회할 수 있습니다.</div>
                             <label><input type="checkbox" name="age14"><span><span class="req">[필수]</span> 만 14세 이상입니다</span></label>
                         </div>
                         <p class="prereg-msg" data-msg role="status"></p>
                     </form>
-                    <p class="or-store">스토어에서도 사전등록할 수 있습니다</p>
+                    <p class="or-store">11월 26일 Google Play · App Store 동시 출시</p>
                     <div class="stores" data-stores></div>
                     <p class="reward-note">※ 지급 기간과 세부 내용은 출시 공지에서 안내합니다.</p>
                 </div>
@@ -495,7 +495,9 @@
             preregisterUrl: /^(127\.0\.0\.1|localhost)$/.test(location.hostname)
                 ? 'https://asia-northeast3-kapaw-dev.cloudfunctions.net/preregisterPhone'
                 : 'https://asia-northeast3-kapaw-prod.cloudfunctions.net/preregisterPhone',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
-            period: '사전등록 진행 중',
+            period: '11월 26일 출시 · 사전등록 진행 중',
+            // 출시 전에는 스토어 단추를 '출시 예정'으로 흐리게 (2026-11-13: 플레이 페이지는 출시 전 일반 사용자에게 404). 출시 날 true로
+            launched: false,
             // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
             rewards: [
                 { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '사전등록 보상' },
@@ -517,7 +519,7 @@
         ];
 
         var MODES = [
-            { name: '실시간 대전', img: 'img/08_battle_combo.webp', title: '실시간 1:1 대전', desc: '실시간으로 상대와 겨뤄 대전 점수를 올립니다. 친구와 대전할 수도 있습니다.' },
+            { name: '실시간 대전', img: 'img/08_battle_combo.webp', title: '3:3 실시간 대전', desc: '캐릭터 3명으로 팀을 짜서 상대 팀과 실시간으로 겨룹니다. 친구와는 1:1로 대전할 수 있습니다.' },
             { name: '모험', img: 'img/04_map.webp', title: '모험 100 스테이지', desc: '당근밭부터 하늘 궁전까지 100개 스테이지. 쉬움·보통·어려움 세 난이도에, 지역마다 새로운 장치와 보스가 등장합니다.' },
             { name: '퍼즐', img: 'img/06_puzzle.webp', title: '퍼즐', desc: '정해진 턴 안에 목표를 달성하는 180개의 퍼즐. 오늘의 퍼즐은 매일 바뀝니다.' },
             { name: '도전 탑', img: 'img/05_tower.webp', title: '도전 탑', desc: '한 층씩 올라가 주간 순위에 도전합니다. 5층마다 보스가 기다립니다.' }
@@ -544,10 +546,12 @@
         }
 
         document.querySelectorAll('[data-stores]').forEach(function (box) {
-            box.appendChild(storeButton(playLink(), 'img/google_play_en.png', 'GET IT ON Google Play'));
-            box.appendChild(CONFIG.appStoreUrl
+            box.appendChild(CONFIG.launched
+                ? storeButton(playLink(), 'img/google_play_en.png', 'GET IT ON Google Play')
+                : storeButton('', 'img/google_play_en.png', 'Google Play 출시 예정', '11월 26일 출시'));
+            box.appendChild(CONFIG.launched && CONFIG.appStoreUrl
                 ? storeButton(CONFIG.appStoreUrl, 'img/app_store_en.svg', 'Download on the App Store')
-                : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '출시 예정'));
+                : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '11월 26일 출시'));
         });
         document.querySelector('[data-period]').textContent = CONFIG.period;
 
