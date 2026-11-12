@@ -500,12 +500,11 @@
             preregisterUrl: /^(127\.0\.0\.1|localhost)$/.test(location.hostname)
                 ? 'https://asia-northeast3-kapaw-dev.cloudfunctions.net/preregisterPhone'
                 : 'https://asia-northeast3-kapaw-prod.cloudfunctions.net/preregisterPhone',                       // 승인되면 주소를 넣음 (비어 있으면 "출시 예정"으로 흐리게)
-            period: '11월 26일 출시 · 사전등록 진행 중',
+            // 출시 날짜·시각은 launchAt 한 곳에만 (화면의 'N월 N일 출시'·D-day가 모두 여기서 나옴)
             // 출시 전에는 스토어 단추 대신 D-day (2026-11-13: 플레이 페이지는 출시 전 일반 사용자에게 404, 흐린 단추는 사기처럼 보임).
             // launchAt(한국 시각)이 지나면 저절로 스토어 단추로 바뀜. 공개가 늦어지면 launchAt을 미루고, 일찍 열면 launched: true
-            launched: false,
-            launchDate: '2026-11-26',
             launchAt: '2026-11-26T10:00:00+09:00',
+            launched: false,
             // 사전등록 보상 (2026-10-23 사용자 확정: 보석 300 + 사전등록 한정 '오크나무 축제' 세트 — 출시 기간 접속자 전원 우편)
             rewards: [
                 { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '사전등록 보상' },
@@ -554,15 +553,19 @@
         }
 
         // 출시 전: 스토어 단추 대신 D-day와 출시일 (CONFIG.launchAt이 지나면 저절로 스토어 단추)
+        // launchAt → 한국 날짜 'N월 N일', 남은 날 (한국 날짜 기준)
+        var launchMs = new Date(CONFIG.launchAt).getTime();
+        function seoulDay(ms) { var k = new Date(ms + 9 * 3600000); return { y: k.getUTCFullYear(), m: k.getUTCMonth() + 1, d: k.getUTCDate(), n: Math.floor((ms + 9 * 3600000) / 86400000) }; }
+        var launchDayKr = seoulDay(launchMs);
+        var launchLabel = launchDayKr.m + '월 ' + launchDayKr.d + '일 출시';
         function launchDay() {
             var d = el('div', 'launch-day');
-            var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
-            var left = Math.ceil((new Date(CONFIG.launchDate + 'T00:00:00') - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+            var left = launchDayKr.n - seoulDay(Date.now()).n;
             d.appendChild(el('b', null, left > 0 ? 'D-' + left : 'D-DAY'));
-            var t = el('span'); t.innerHTML = '11월 26일 출시<br><span class="nw">Google Play · App Store</span>'; d.appendChild(t);
+            var t = el('span'); t.innerHTML = launchLabel + '<br><span class="nw">Google Play · App Store</span>'; d.appendChild(t);
             return d;
         }
-        var launched = CONFIG.launched || Date.now() >= new Date(CONFIG.launchAt).getTime();
+        var launched = CONFIG.launched || Date.now() >= launchMs;
         document.querySelectorAll('[data-stores]').forEach(function (box) {
             if (!launched) {
                 box.appendChild(launchDay());
@@ -572,9 +575,9 @@
             box.appendChild(storeButton(playLink(), 'img/google_play_en.png', 'GET IT ON Google Play'));
             box.appendChild(CONFIG.appStoreUrl
                 ? storeButton(CONFIG.appStoreUrl, 'img/app_store_en.svg', 'Download on the App Store')
-                : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', '11월 26일 출시'));
+                : storeButton('', 'img/app_store_en.svg', 'App Store 출시 예정', launchLabel));
         });
-        document.querySelector('[data-period]').textContent = launched ? '지금 출시! 사전등록 보상은 우편함으로' : CONFIG.period;
+        document.querySelector('[data-period]').textContent = launched ? '지금 출시! 사전등록 보상은 우편함으로' : launchLabel + ' · 사전등록 진행 중';
         if (launched) document.querySelectorAll('.or-store').forEach(function (e) { e.textContent = 'Google Play · App Store에서 지금 받으세요'; });
 
         // 휴대폰 번호 사전등록
