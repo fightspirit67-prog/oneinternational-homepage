@@ -94,13 +94,20 @@
         .hero picture { display: block; position: relative; }
         .hero picture::after { content: ''; position: absolute; inset: auto 0 0 0; height: 18%; background: linear-gradient(180deg, rgba(255, 247, 232, 0), var(--cream)); }
         .hero-inner { position: relative; z-index: 1; text-align: center; padding: 6px 16px 70px; margin-top: -30px; }
-        /* 첫 화면 영상: 그림 위에 겹쳐 가운데 — PC는 첫 화면 안에 영상·제목·단추가 다 들어오게 높이로 폭을 정함 */
-        .hero picture { position: absolute; inset: var(--header-h) 0 auto 0; }
-        .hero-video { position: relative; z-index: 1; width: min(1040px, calc(100% - 32px), calc((100svh - var(--header-h) - 340px) * 16 / 9)); min-width: min(560px, calc(100% - 32px));
-            margin: 28px auto 0; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: #000;
+        /* 첫 화면 영상 (2026-11-15): 그림(로고·캐릭터)은 가리지 않고 그 아래에.
+           PC = 그림 높이를 화면에 맞춰 줄이고(위·아래 조금 잘림) 아래 줄에 [제목·단추 | 영상] — 1440x900에서 그림·영상·단추가 한 화면에
+           폰 = 그림 → 영상 → 제목 */
+        .hero-video { position: relative; z-index: 1; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: #000;
             box-shadow: 0 18px 50px rgba(80, 45, 10, .35); border: 4px solid #fff; }
         .hero-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
-        .hero-video + .hero-inner { margin-top: 0; padding-top: 22px; }
+        @media (min-width: 860px) {
+            .hero .hero-img { height: clamp(380px, calc(100svh - var(--header-h) - 372px), 41.6vw); object-fit: cover; object-position: 50% 30%; }
+            .hero-stage { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; gap: 44px; align-items: center;
+                max-width: 1180px; margin: -8px auto 0; padding: 0 32px 48px; }
+            .hero-stage .hero-video { order: 2; width: clamp(460px, 44vw, 640px); }
+            .hero-stage .hero-inner { order: 1; margin: 0; padding: 40px 0 0; text-align: left; }
+            .hero-stage .hero .row, .hero-stage .row { justify-content: flex-start; }
+        }
         .hero h1 { margin: 0; font-size: clamp(30px, 5vw, 54px); line-height: 1.2; text-shadow: 0 2px 0 #fff; }
         .hero .lead { margin: 10px 0 22px; font-size: clamp(15px, 2.4vw, 20px); color: var(--brown-soft); font-weight: 500; }
         .hero .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
@@ -292,9 +299,8 @@
             }
             .nav.open a { font-size: 20px; padding: 12px 8px; border-radius: 12px; }
             .hero-inner { padding: 6px 16px 8px; margin-top: -16px; }
-            .hero picture { position: relative; inset: auto; }   /* 폰: 그림 아래에 영상 (첫 화면 안에 들어옴) */
-            .hero-video { width: calc(100% - 32px); min-width: 0; margin-top: -24px; border-width: 3px; }
-            .hero-video + .hero-inner { padding-top: 16px; }
+            .hero-video { width: calc(100% - 32px); margin: -24px auto 0; border-width: 3px; }   /* 폰: 그림 아래에 영상 (첫 화면 안에 들어옴) */
+            .hero-video + .hero-inner { margin-top: 0; padding-top: 16px; }
             .scroll-hint { display: none; }
             .hero .row .btn.big { display: none; }
             .sticky-cta { display: block; }
@@ -338,6 +344,7 @@
             <!-- 게임 영상: 들어오자마자 소리 없이 재생 (2026-11-15 대표: "영상이 맨 밑에 있는데 바로 보여야"). 소리는 단추로.
                  2026-11-15: 사전등록 광고 가로판 68초(KaPaw 저장소 Marketing/AdVideo/kapaw_prereg_ad_C가로_20261115-0317.mp4를 720p로, 12.9MB) —
                  캐릭터 5명 풀콤보 → 퍼즐 → 3:3 → 사전등록 혜택. 예전: 날짜 없는 스토어 영상 27초(media/kapaw_play.mp4) -->
+            <div class="hero-stage">
             <div class="hero-video" id="trailer">
                 <video data-inline src="media/kapaw_prereg.mp4" poster="media/kapaw_prereg_poster.jpg" muted autoplay loop playsinline preload="auto" aria-label="카파우 사전등록 영상"></video>
                 <button class="sound-btn" type="button" data-sound><i></i><span>소리 켜기</span></button>
@@ -350,6 +357,7 @@
                     <button class="play-btn" type="button" data-video><i></i>트레일러</button>
                 </div>
                 <p class="period" data-period></p>
+            </div>
             </div>
             <span class="scroll-hint" aria-hidden="true"></span>
         </div>
