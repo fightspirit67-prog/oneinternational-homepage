@@ -116,6 +116,7 @@
         .sec-head .tag { display: inline-block; font-family: 'Jua', sans-serif; font-size: 16px; color: #fff; background: var(--orange); padding: 4px 14px; border-radius: 999px; }
         .sec-head h2 { margin: 10px 0 6px; font-size: clamp(30px, 4.6vw, 44px); line-height: 1.2; }
         .sec-head p { margin: 0; color: var(--brown-soft); font-size: clamp(15px, 2.2vw, 18px); }
+        .sec-head p.how { margin-top: 12px; display: inline-block; padding: 8px 18px; background: var(--cream); border-radius: 14px; line-height: 1.5; font-size: clamp(14px, 2vw, 16px); word-break: keep-all; }
 
         /* ---------- 사전등록 보상 ---------- */
         .reward-box {
@@ -211,7 +212,7 @@
         .skill { display: grid; grid-template-columns: 64px 1fr; gap: 10px; align-items: baseline; padding: 10px 12px; background: var(--cream); border-radius: 14px; }
         .skill b { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 14px; color: var(--brown-soft); }
         .skill .t { font-family: 'Jua', sans-serif; font-size: 19px; }
-        .skill .d { display: block; font-size: 14px; color: var(--brown-soft); }
+        .skill .d { display: block; font-size: 14px; color: var(--brown-soft); word-break: keep-all; }
         .skill.ult { background: linear-gradient(90deg, #fff0d0, #ffe0a6); }
         .skill.ult b { color: var(--orange-deep); }
 
@@ -407,6 +408,7 @@
                     <span class="tag">CHARACTER</span>
                     <h2>캐릭터</h2>
                     <p>다섯 캐릭터, 다섯 가지 전략</p>
+                    <p class="how">타일을 터뜨리면 스킬 게이지가 차요.<br>찬 스킬은 원할 때 눌러 써요.</p>
                 </div>
                 <div class="char-tabs" data-char-tabs></div>
                 <div class="char-panel reveal">
@@ -509,20 +511,69 @@
             rewards: [
                 { img: 'img/gem_pouch.webp', name: '보석 300개', sub: '사전등록 보상' },
                 { img: 'img/reward_party.webp', name: '오크나무 축제 세트', sub: '사전등록 한정 스킨' }
-            ]
+            ],
+            // 방문 분석 (2026-11-15 대표: 폰/PC·유입 경로를 알고 광고별 사전등록을 비교). 비어 있으면 그 도구는 안 불러옴.
+            //   gaId = Google Analytics 측정 ID (G-로 시작, kapaw-prod 웹 앱) — 사전등록 완료 'preregister_phone'을 주요 이벤트로 → Google Ads 전환으로 가져옴
+            //   metaPixelId = Meta 픽셀 ID (숫자) — 사전등록 완료 때 'Lead' → 인스타 광고가 사전등록할 사람을 찾음
+            //   이 PC(127.0.0.1)에서 띄운 시험 페이지는 기록하지 않음. 처리방침 제9조와 같이 고칠 것
+            gaId: '',
+            metaPixelId: ''
         };
 
+        // 유입 꼬리표: 광고 링크의 utm_* 만 기억 (구글·메타가 붙이는 긴 클릭 번호 gclid·fbclid는 사전등록 기록에 안 남김).
+        //   새로 고침해도 남게 이 탭 동안 sessionStorage에. 짧은 주소 /kapaw/ig·/kapaw/yt 도 여기로 꼬리표를 붙여 넘어옴
+        var LANDING_HREF = location.href;
+        var UTM = (function () {
+            var q = new URLSearchParams(location.search), keep = [];
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+                if (q.get(k)) keep.push(k + '=' + encodeURIComponent(q.get(k)));
+            });
+            var v = keep.join('&');
+            try { if (v) sessionStorage.setItem('kapaw_utm', v); else v = sessionStorage.getItem('kapaw_utm') || ''; } catch (e) {}
+            return v;
+        })();
+
+        // 방문 분석 불러오기 (실제 주소에서만)
+        var TRACK = !/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+        function track(gaEvent, metaEvent) {
+            if (window.gtag && gaEvent) gtag('event', gaEvent);
+            if (window.fbq && metaEvent) fbq('track', metaEvent);
+        }
+        if (TRACK && CONFIG.gaId) {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', CONFIG.gaId, { page_location: LANDING_HREF });   // 주소창에서 꼬리표를 지워도 들어온 주소 그대로 기록
+            var g = document.createElement('script'); g.async = true;
+            g.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.gaId;
+            document.head.appendChild(g);
+        }
+        if (TRACK && CONFIG.metaPixelId) {
+            !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v;
+                s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', CONFIG.metaPixelId);
+            fbq('track', 'PageView');
+        }
+        // 분석 도구가 들어온 주소를 읽은 뒤 주소창을 oneintl2025.com/kapaw/ 로 깔끔하게 (#보상 같은 위치는 그대로)
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                if (location.search) try { history.replaceState(history.state, '', location.pathname + location.hash); } catch (e) {}
+            }, 1500);
+        });
+
+        // 스킬 글 = 무엇을 하는지 힌트만, 숫자는 뺌, 해요체 (2026-11-15 대표: "데미지는 빼자", "~해요 톤으로, 데미지를 주는지는 알게"). 효과가 바뀌면 같이 고칠 것
         var CHARS = [
             { id: 'dog', name: '맥스', kind: '코기', role: '공격', color: '#e8792c', bg: '#ffe3b8',
-              skills: [['할퀴기', '26 데미지'], ['연속 물기', '세 번 물기, 한 번에 12 데미지'], ['으르렁', '출혈! 6초 동안 47 데미지'], ['하울링', '107 데미지']] },
+              skills: [['할퀴기', '상대를 할퀴어 데미지를 줘요.'], ['연속 물기', '세 번 연달아 물어 데미지를 줘요.'], ['으르렁', '출혈을 걸어 6초 동안 체력을 깎아요.'], ['하울링', '한 방에 큰 데미지를 줘요.']] },
             { id: 'rabbit', name: '코코', kind: '토끼', role: '회복', color: '#e86aa0', bg: '#ffe0ec',
-              skills: [['당근', '6초 동안 HP 55 회복'], ['깨끗이', '내 판의 돌·얼음 치우기 + HP 21 회복'], ['클로버 보호막', '데미지 71을 막는 자동 보호막, 깨지면 다음 것이 켜짐'], ['달토끼의 축복', 'HP 55 회복 + 보호막 71']] },
+              skills: [['당근', '6초 동안 체력이 조금씩 차요.'], ['깨끗이', '내 판의 돌과 얼음을 치우고 체력을 채워요.'], ['클로버 보호막', '보호막이 저절로 켜져 받는 공격을 줄여요.'], ['달토끼의 축복', '체력을 채우고 보호막을 씌워요.']] },
             { id: 'penguin', name: '민트', kind: '펭귄', role: '방해', color: '#3d8fd8', bg: '#dceeff',
-              skills: [['얼음', '얼음 2칸 + 7 데미지'], ['고드름', '세 번 깨야 하는 얼음 2칸 + 10 데미지'], ['한파', '6초 동안 눈! 상대 타일이 40% 느려짐'], ['블리자드', '얼음 6칸 + 16 데미지 + 6초 동안 80% 느려짐']] },
+              skills: [['얼음', '상대 타일을 얼리고 데미지를 줘요.'], ['고드름', '세 번 깨야 풀리는 얼음을 박고 데미지를 줘요.'], ['한파', '상대 판에 눈을 내려 타일을 느리게 해요.'], ['블리자드', '상대 판을 잔뜩 얼리고 느리게 해요. 데미지도 줘요.']] },
             { id: 'panda', name: '록키', kind: '판다', role: '방어', color: '#5b6b7a', bg: '#e6ece6',
-              skills: [['바위', '돌 1개, 쿵! 돌마다 14 데미지'], ['바위 벽', '가운데에 돌벽 2개, 돌마다 14 데미지'], ['단단하게', '금 간 돌을 다시 단단하게 + 돌 1개'], ['낙석', '돌 5개, 쿵쿵! 돌마다 14 데미지']] },
+              skills: [['바위', '상대 판에 돌을 떨어뜨려 데미지를 줘요.'], ['바위 벽', '상대 판 가운데에 돌벽을 세우고 데미지를 줘요.'], ['단단하게', '금 간 돌을 다시 단단하게 하고 돌을 하나 더 떨어뜨려요.'], ['낙석', '돌을 한꺼번에 쏟아 큰 데미지를 줘요.']] },
             { id: 'fox', name: '나인', kind: '여우', role: '특수 블록', color: '#d8572a', bg: '#ffe0cc',
-              skills: [['여우불', '잠든 특수 타일 2개 (매치에 섞이면 터짐)'], ['둔갑', '잠든 특수 타일을 모두 깨움'], ['홀리기', '2초 동안 매치 데미지 2배'], ['구미호', '특수 타일 7개']] }
+              skills: [['여우불', '내 판에 특수 타일을 심어요.'], ['둔갑', '심어 둔 특수 타일을 한 번에 깨워요.'], ['홀리기', '잠깐 동안 매치 공격이 세져요.'], ['구미호', '구미호 타일이 한꺼번에 터져 큰 데미지를 줘요.']] }
         ];
 
         var MODES = [
@@ -534,12 +585,8 @@
 
         // 광고 링크의 utm_* 를 Play 설치 기록(referrer)으로 넘김 → Play 콘솔 '획득 보고서'에서 광고별로 봄
         function playLink() {
-            var q = new URLSearchParams(location.search), keep = [];
-            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
-                if (q.get(k)) keep.push(k + '=' + encodeURIComponent(q.get(k)));
-            });
-            if (!keep.length) keep.push('utm_source=kapaw_landing', 'utm_medium=web');
-            return CONFIG.playUrl + '&referrer=' + encodeURIComponent(keep.join('&'));
+            var v = UTM || 'utm_source=kapaw_landing&utm_medium=web';
+            return CONFIG.playUrl + '&referrer=' + encodeURIComponent(v);
         }
 
         function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -610,13 +657,13 @@
                 say('등록 중입니다…');
                 fetch(CONFIG.preregisterUrl, {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phone: digits, privacy: true, sms: true, age14: true, website: form.elements.website.value, source: location.search.slice(1) })
+                    body: JSON.stringify({ phone: digits, privacy: true, sms: true, age14: true, website: form.elements.website.value, source: UTM })
                 }).then(function (r) {
                     return r.json().then(function (j) { return { ok: r.ok, body: j }; });
                 }).then(function (r) {
                     if (!r.ok) throw new Error(r.body.error || '');
                     say(r.body.status === 'already' ? '이미 사전등록된 번호입니다.' : '사전등록이 완료되었습니다. 출시되면 문자로 알려 드립니다.', 'ok');
-                    if (r.body.status === 'ok') { phone.value = ''; if (window.gtag) gtag('event', 'preregister_phone'); }
+                    if (r.body.status === 'ok') { phone.value = ''; track('preregister_phone', 'Lead'); }
                 }).catch(function (err) {
                     say(err.message || '연결이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.', 'err');
                 }).then(function () { button.disabled = false; });
