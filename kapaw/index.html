@@ -159,9 +159,9 @@
         .set-show p { margin: 0 auto 16px; max-width: 640px; color: var(--brown-soft); }
         .set-shots { display: grid; grid-template-columns: 1fr; gap: 12px; }
         .set-shots figure { margin: 0; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
-        .set-shots img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+        .set-shots video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #2a2350; }
         .set-shots figcaption { padding: 8px 0 10px; font-family: 'Jua', sans-serif; font-size: 18px; }
-        @media (min-width: 860px) { .set-shots { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 860px) { .set-shots { max-width: 860px; margin: 0 auto; } }
 
         /* ---------- 휴대폰 번호 사전등록 ---------- */
         .prereg { max-width: 520px; margin: 0 auto 22px; text-align: left; }
@@ -403,8 +403,7 @@
                     <h3>사전등록 한정 스킨 <span>「오크나무 축제」</span></h3>
                     <p>밤하늘을 수놓는 폭죽과 떠오르는 풍선. 로비, 대전 화면, 음악, 효과까지 모두 바뀝니다.</p>
                     <div class="set-shots">
-                        <figure><img src="img/party_lobby.webp" width="1200" height="670" loading="lazy" alt="오크나무 축제 로비"><figcaption>로비</figcaption></figure>
-                        <figure><img src="img/party_battle.webp" width="600" height="398" loading="lazy" alt="오크나무 축제 대전 화면"><figcaption>대전</figcaption></figure>
+                        <figure><video src="media/party_lobby.mp4" poster="media/party_lobby_poster.jpg" width="1280" height="720" muted autoplay loop playsinline preload="metadata" aria-label="오크나무 축제 로비: 맥스 뒤로 폭죽이 터지는 모습"></video></figure>
                     </div>
                 </div>
             </div>
