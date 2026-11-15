@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- 출시 문자 짧은 주소 oneintl2025.com/kapaw/d1 = B 광고로 사전등록한 사람 — 폰 종류를 보고 스토어로 넘김 (go/go.js) -->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>카파우: 동물 퍼즐 대전</title>
+    <link rel="icon" href="../img/icon.png">
+    <script>window.KAPAW_GROUP = 'B';</script>
+    <script src="../go/go.js"></script>
+    <style>
+        body { margin: 0; background: #fff7e8; font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; text-align: center; }
+        a { display: block; margin: 12px; color: #c4561a; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div>
+        <a id="play" href="https://play.google.com/store/apps/details?id=com.one.kapaw">안드로이드 (Google Play)</a>
+        <a id="ios" href="https://apps.apple.com/kr/app/id6821535063">아이폰 (App Store)</a>
+    </div>
+    <script>
+        if (window.KAPAW_LINKS) {
+            document.getElementById('play').href = KAPAW_LINKS.play;
+            document.getElementById('ios').href = KAPAW_LINKS.appStore;
+        }
+    </script>
+</body>
+</html>

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!-- 출시 문자 링크 oneintl2025.com/kapaw/go?g=B (2026-11-15): 문자에 링크 하나만 넣고, 누른 폰이 아이폰이면 App Store, 아니면 Play 스토어로 바로 넘김.
-     g = 사전등록 때 들어온 광고 묶음 (B, C, other — tools/preregister.mjs --split 파일 이름과 같음)
-       안드로이드: Play 링크 referrer에 꼬리표 → Play 설치 기록·Firebase 분석 first_open에 묶음이 잡혀 "어느 광고로 등록한 사람이 몇 판 했는지"까지 봄
-       아이폰: App Store 캠페인 꼬리표 ct → App Store Connect에서 묶음별 설치 수 (애플은 사람별 기록을 안 줌) -->
+<!-- 출시 문자 짧은 주소 oneintl2025.com/kapaw/go?g=묶음 (예전 주소, 그대로 둠) — 폰 종류를 보고 스토어로 넘김 (go/go.js) -->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -10,18 +7,7 @@
     <meta name="robots" content="noindex">
     <title>카파우: 동물 퍼즐 대전</title>
     <link rel="icon" href="../img/icon.png">
-    <script>
-        (function () {
-            var g = (new URLSearchParams(location.search).get('g') || 'other').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 20) || 'other';
-            var ua = navigator.userAgent || '';
-            var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);   // 아이패드는 PC처럼 보일 때가 있음
-            var play = 'https://play.google.com/store/apps/details?id=com.one.kapaw&referrer='
-                + encodeURIComponent('utm_source=prereg_sms&utm_medium=sms&utm_content=' + g);
-            var appStore = 'https://apps.apple.com/kr/app/id6821535063?ct=prereg_sms_' + g;
-            window.KAPAW_LINKS = { play: play, appStore: appStore };
-            location.replace(ios ? appStore : play);
-        })();
-    </script>
+    <script src="../go/go.js"></script>
     <style>
         body { margin: 0; background: #fff7e8; font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; text-align: center; }
         a { display: block; margin: 12px; color: #c4561a; font-size: 18px; }
