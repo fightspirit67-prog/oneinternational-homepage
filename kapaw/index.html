@@ -574,7 +574,8 @@
             window.gtag = function () { dataLayer.push(arguments); };
             gtag('js', new Date());
             gtag('config', CONFIG.gaId, { page_location: LANDING_HREF });   // 주소창에서 꼬리표를 지워도 들어온 주소 그대로 기록
-            if (CONFIG.adsId) gtag('config', CONFIG.adsId, { page_location: LANDING_HREF });
+            // 광고 성과 측정만 (처리방침 제9조) — 방문자를 다시 쫓아가는 리마케팅 목록에는 넣지 않음
+            if (CONFIG.adsId) gtag('config', CONFIG.adsId, { page_location: LANDING_HREF, allow_ad_personalization_signals: false });
             var g = document.createElement('script'); g.async = true;
             g.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.gaId;
             document.head.appendChild(g);
