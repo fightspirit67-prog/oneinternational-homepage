@@ -543,6 +543,9 @@
             //   metaPixelId = Meta 픽셀 ID (숫자) — 사전등록 완료 때 'Lead' → 인스타 광고가 사전등록할 사람을 찾음
             //   이 PC(127.0.0.1)에서 띄운 시험 페이지는 기록하지 않음. 처리방침 제9조와 같이 고칠 것
             gaId: 'G-CG9Z8ZSGQG',   // kapaw-prod 웹 앱 'KaPaw Prereg Web' (2026-11-15 만듦)
+            //   adsId·adsSendTo = Google Ads 전환 태그 (2026-11-16): GA4를 거치면 늦고 일부가 빠져서, 메타 픽셀처럼 등록 완료를 구글 애즈로 바로 보냄
+            adsId: 'AW-18417754904',
+            adsSendTo: '',
             metaPixelId: '1479961564058164'
         };
 
@@ -563,6 +566,7 @@
         var TRACK = !/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
         function track(gaEvent, metaEvent) {
             if (window.gtag && gaEvent) gtag('event', gaEvent);
+            if (window.gtag && gaEvent === 'preregister_phone' && CONFIG.adsSendTo) gtag('event', 'conversion', { send_to: CONFIG.adsSendTo });
             if (window.fbq && metaEvent) fbq('track', metaEvent);
         }
         if (TRACK && CONFIG.gaId) {
@@ -570,6 +574,7 @@
             window.gtag = function () { dataLayer.push(arguments); };
             gtag('js', new Date());
             gtag('config', CONFIG.gaId, { page_location: LANDING_HREF });   // 주소창에서 꼬리표를 지워도 들어온 주소 그대로 기록
+            if (CONFIG.adsId) gtag('config', CONFIG.adsId, { page_location: LANDING_HREF });
             var g = document.createElement('script'); g.async = true;
             g.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.gaId;
             document.head.appendChild(g);
@@ -583,9 +588,15 @@
         }
         // 분석 도구가 들어온 주소를 읽은 뒤 주소창을 oneintl2025.com/kapaw/ 로 깔끔하게 (#보상 같은 위치는 그대로)
         window.addEventListener('load', function () {
-            setTimeout(function () {
-                if (location.search) try { history.replaceState(history.state, '', location.pathname + location.hash); } catch (e) {}
-            }, 1500);
+            // 구글 태그가 주소의 광고 클릭 번호(gclid)를 읽은 뒤에 지움 — 태그가 늦게 뜨면 최대 6초까지 기다림
+            var waited = 0;
+            (function clean() {
+                var ready = !TRACK || !CONFIG.gaId || window.google_tag_manager;
+                if (!ready && waited < 6000) { waited += 300; return setTimeout(clean, 300); }
+                setTimeout(function () {
+                    if (location.search) try { history.replaceState(history.state, '', location.pathname + location.hash); } catch (e) {}
+                }, 1000);
+            })();
         });
 
         // 스킬 글 = 무엇을 하는지 힌트만, 숫자는 뺌, 해요체 (2026-11-15 대표: "데미지는 빼자", "~해요 톤으로, 데미지를 주는지는 알게"). 효과가 바뀌면 같이 고칠 것
