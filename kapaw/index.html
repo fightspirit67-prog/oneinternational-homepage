@@ -545,7 +545,7 @@
             gaId: 'G-CG9Z8ZSGQG',   // kapaw-prod 웹 앱 'KaPaw Prereg Web' (2026-11-15 만듦)
             //   adsId·adsSendTo = Google Ads 전환 태그 (2026-11-16): GA4를 거치면 늦고 일부가 빠져서, 메타 픽셀처럼 등록 완료를 구글 애즈로 바로 보냄
             adsId: 'AW-18417754904',
-            adsSendTo: '',
+            adsSendTo: 'AW-18417754904/baGgCKiloLkdEJjGos5E',   // 전환 '사전등록 (홈페이지 태그)'
             metaPixelId: '1479961564058164'
         };
 
@@ -566,7 +566,7 @@
         var TRACK = !/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
         function track(gaEvent, metaEvent) {
             if (window.gtag && gaEvent) gtag('event', gaEvent);
-            if (window.gtag && gaEvent === 'preregister_phone' && CONFIG.adsSendTo) gtag('event', 'conversion', { send_to: CONFIG.adsSendTo });
+            if (window.gtag && gaEvent === 'preregister_phone' && CONFIG.adsSendTo) gtag('event', 'conversion', { send_to: CONFIG.adsSendTo, value: 1.0, currency: 'KRW' });
             if (window.fbq && metaEvent) fbq('track', metaEvent);
         }
         if (TRACK && CONFIG.gaId) {
